@@ -1,0 +1,53 @@
+<ul class="nav nav-tabs">
+	<li class="dropdown">
+		<a  class="dropdown-toggle"
+			data-toggle="dropdown"
+			href="#"
+			data-toggle="tab"
+		>
+			System Parameters
+			<b class="caret"></b>
+		</a>
+		<ul class="dropdown-menu">
+			<li class="active"><a href="#">Formation Names</a></li>
+			<li><a href="#">Treatment Names</a></li>
+		</ul>
+	</li>
+</ul>
+<hr/>
+
+<script type="text/javascript">
+	$(function() {
+		$('#entityTabs a:first').tab('show');
+	});
+</script>
+
+<ul class="nav nav-tabs" id="entityTabs">
+	<li><a href="#tbHome" data-toggle="tab">Home</a></li>
+	<li><a href="#tbLease" data-toggle="tab">Leases</a></li>
+	<li><a href="#tbTank" data-toggle="tab">Tank Batteries</a></li>
+	<li><a href="#tbWell" data-toggle="tab">Wells</a></li>
+	<li><a href="#tbInv" data-toggle="tab">Invest</a></li>
+</ul>
+
+<div class="tab-content">
+	<div id="tbHome" class="tab-pane">
+		<p>Home tab</p>
+	</div>
+	
+	<div id="tbLease" class="tab-pane">
+		<p>Leases tab</p>
+	</div>	
+	
+	<div id="tbTank" class="tab-pane">
+		<p>Tank Batteries tab</p>
+	</div>	
+	
+	<div id="tbWell" class="tab-pane">
+		<p>Wells tab</p>
+	</div>	
+	
+	<div id="tbInv" class="tab-pane">
+		<p>Investors tab</p>
+	</div>	
+</div>
