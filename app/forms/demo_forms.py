@@ -1,7 +1,8 @@
 from flask.ext.wtf import Form, TextField, BooleanField, TextAreaField
 from flask.ext.wtf import Required, Length
 from flask.ext.babel import gettext
-from app.models import User
+
+from app.model.user import User
 
 class LoginForm(Form):
     openid = TextField('openid', validators = [Required()])
