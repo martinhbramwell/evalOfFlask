@@ -6,3 +6,7 @@ flask
 *.mo
 .profile
 db_repository
+build
+*.*~
+
+
