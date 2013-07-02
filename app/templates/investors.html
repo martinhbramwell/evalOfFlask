@@ -1,0 +1,11 @@
+investor list
+
+<br/>
+For : {{payload['name']}}
+<br/>
+<br/>
+{% for item in payload['lstData'] %}
+    <br/>{{item}}
+{% endfor %}
+
+
