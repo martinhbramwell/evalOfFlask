@@ -3,12 +3,7 @@ from flask.ext.wtf import Required, Length
 from flask.ext.babel import gettext
 
 from app.model.user import User
-from app.model.lease import Lease
 
-class LoginForm(Form):
-    openid = TextField('openid', validators = [Required()])
-    remember_me = BooleanField('remember_me', default = False)
-    
 class EditForm(Form):
     nickname = TextField('nickname', validators = [Required()])
     about_me = TextAreaField('about_me', validators = [Length(min = 0, max = 140)])
@@ -30,9 +25,4 @@ class EditForm(Form):
             self.nickname.errors.append(gettext('This nickname is already in use. Please choose another one.'))
             return False
         return True
-        
-class PostForm(Form):
-    post = TextField('post', validators = [Required()])
-    
-class SearchForm(Form):
-    search = TextField('search', validators = [Required()])
+

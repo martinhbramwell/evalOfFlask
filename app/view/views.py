@@ -3,7 +3,8 @@ from flask.ext.login import login_user, logout_user, current_user, login_require
 from flask.ext.sqlalchemy import get_debug_queries
 from flask.ext.babel import gettext
 from app import app, orm_db, lm, oid, babel
-from app.forms.demo_forms import LoginForm, EditForm, PostForm, SearchForm
+from app.forms.demo_forms import EditForm
+from app.forms.app_forms import LoginForm, PostForm, SearchForm
 
 
 from app.model.user import User, ROLE_USER, ROLE_ADMIN
@@ -29,8 +30,8 @@ def before_request():
     g.user = current_user
     if g.user.is_authenticated():
         g.user.last_seen = datetime.utcnow()
-        db.session.add(g.user)
-        db.session.commit()
+        orm_db.session.add(g.user)
+        orm_db.session.commit()
         g.search_form = SearchForm()
     g.locale = get_locale()
     g.search_enabled = WHOOSH_ENABLED
@@ -48,7 +49,7 @@ def internal_error(error):
 
 @app.errorhandler(500)
 def internal_error(error):
-    db.session.rollback()
+    orm_db.session.rollback()
     return render_template('500.html'), 500
 
 @app.route('/', methods = ['GET', 'POST'])
@@ -65,8 +66,8 @@ def index(page = 1):
             timestamp = datetime.utcnow(),
             author = g.user,
             language = language)
-        db.session.add(post)
-        db.session.commit()
+        orm_db.session.add(post)
+        orm_db.session.commit()
         flash(gettext('Your post is now live!'))
         return redirect(url_for('index'))
     posts = g.user.followed_posts().paginate(page, POSTS_PER_PAGE, False)
@@ -102,11 +103,11 @@ def after_login(resp):
         nickname = User.make_valid_nickname(nickname)
         nickname = User.make_unique_nickname(nickname)
         user = User(nickname = nickname, email = resp.email, role = ROLE_USER)
-        db.session.add(user)
-        db.session.commit()
+        orm_db.session.add(user)
+        orm_db.session.commit()
         # make the user follow him/herself
-        db.session.add(user.follow(user))
-        db.session.commit()
+        orm_db.session.add(user.follow(user))
+        orm_db.session.commit()
     remember_me = False
     if 'remember_me' in session:
         remember_me = session['remember_me']
@@ -139,8 +140,8 @@ def edit():
     if form.validate_on_submit():
         g.user.nickname = form.nickname.data
         g.user.about_me = form.about_me.data
-        db.session.add(g.user)
-        db.session.commit()
+        orm_db.session.add(g.user)
+        orm_db.session.commit()
         flash(gettext('Your changes have been saved.'))
         return redirect(url_for('edit'))
     elif request.method != "POST":
@@ -163,8 +164,8 @@ def follow(nickname):
     if u is None:
         flash(gettext('Cannot follow %(nickname)s.', nickname = nickname))
         return redirect(url_for('user', nickname = nickname))
-    db.session.add(u)
-    db.session.commit()
+    orm_db.session.add(u)
+    orm_db.session.commit()
     flash(gettext('You are now following %(nickname)s!', nickname = nickname))
     follower_notification(user, g.user)
     return redirect(url_for('user', nickname = nickname))
@@ -183,8 +184,8 @@ def unfollow(nickname):
     if u is None:
         flash(gettext('Cannot unfollow %(nickname)s.', nickname = nickname))
         return redirect(url_for('user', nickname = nickname))
-    db.session.add(u)
-    db.session.commit()
+    orm_db.session.add(u)
+    orm_db.session.commit()
     flash(gettext('You have stopped following %(nickname)s.', nickname = nickname))
     return redirect(url_for('user', nickname = nickname))
 
@@ -198,8 +199,8 @@ def delete(id):
     if post.author.id != g.user.id:
         flash('You cannot delete this post.')
         return redirect(url_for('index'))
-    db.session.delete(post)
-    db.session.commit()
+    orm_db.session.delete(post)
+    orm_db.session.commit()
     flash('Your post has been deleted.')
     return redirect(url_for('index'))
     
