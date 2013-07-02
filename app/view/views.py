@@ -2,7 +2,7 @@ from flask import render_template, flash, redirect, session, url_for, request, g
 from flask.ext.login import login_user, logout_user, current_user, login_required
 from flask.ext.sqlalchemy import get_debug_queries
 from flask.ext.babel import gettext
-from app import app, db, lm, oid, babel
+from app import app, orm_db, lm, oid, babel
 from app.forms.demo_forms import LoginForm, EditForm, PostForm, SearchForm
 
 

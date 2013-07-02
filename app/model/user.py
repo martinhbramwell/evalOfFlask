@@ -1,5 +1,5 @@
 from hashlib import md5
-from app import db
+from app import orm_db
 from app import app
 import re
 
@@ -8,25 +8,25 @@ from app.model.post import Post
 ROLE_USER = 0
 ROLE_ADMIN = 1
 
-followers = db.Table('followers',
-    db.Column('follower_id', db.Integer, db.ForeignKey('authenticateduser.id')),
-    db.Column('followed_id', db.Integer, db.ForeignKey('authenticateduser.id'))
+followers = orm_db.Table('followers',
+    orm_db.Column('follower_id', orm_db.Integer, orm_db.ForeignKey('authenticateduser.id')),
+    orm_db.Column('followed_id', orm_db.Integer, orm_db.ForeignKey('authenticateduser.id'))
 )
 
-class User(db.Model):
+class User(orm_db.Model):
     __tablename__ = 'authenticateduser'
-    id = db.Column(db.Integer, primary_key = True)
-    nickname = db.Column(db.String(64), unique = True)
-    email = db.Column(db.String(120), index = True, unique = True)
-    role = db.Column(db.SmallInteger, default = ROLE_USER)
-    posts = db.relationship('Post', backref = 'author', lazy = 'dynamic')
-    about_me = db.Column(db.String(140))
-    last_seen = db.Column(db.DateTime)
-    followed = db.relationship('User', 
+    id = orm_db.Column(orm_db.Integer, primary_key = True)
+    nickname = orm_db.Column(orm_db.String(64), unique = True)
+    email = orm_db.Column(orm_db.String(120), index = True, unique = True)
+    role = orm_db.Column(orm_db.SmallInteger, default = ROLE_USER)
+    posts = orm_db.relationship('Post', backref = 'author', lazy = 'dynamic')
+    about_me = orm_db.Column(orm_db.String(140))
+    last_seen = orm_db.Column(orm_db.DateTime)
+    followed = orm_db.relationship('User', 
         secondary = followers, 
         primaryjoin = (followers.c.follower_id == id), 
         secondaryjoin = (followers.c.followed_id == id), 
-        backref = db.backref('followers', lazy = 'dynamic'), 
+        backref = orm_db.backref('followers', lazy = 'dynamic'), 
         lazy = 'dynamic')
 
     @staticmethod

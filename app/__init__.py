@@ -10,7 +10,7 @@ from momentjs import momentjs
 
 app = Flask(__name__)
 app.config.from_object('config')
-db = SQLAlchemy(app)
+orm_db = SQLAlchemy(app)
 
 lm = LoginManager()
 lm.init_app(app)

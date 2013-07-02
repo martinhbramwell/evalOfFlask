@@ -1,15 +1,15 @@
-from app import db
+from app import orm_db
 from app import app
 from config import WHOOSH_ENABLED
 
-class Post(db.Model):
+class Post(orm_db.Model):
     __searchable__ = ['body']
     
-    id = db.Column(db.Integer, primary_key = True)
-    body = db.Column(db.String(140))
-    timestamp = db.Column(db.DateTime)
-    user_id = db.Column(db.Integer, db.ForeignKey('authenticateduser.id'))
-    language = db.Column(db.String(5))
+    id = orm_db.Column(orm_db.Integer, primary_key = True)
+    body = orm_db.Column(orm_db.String(140))
+    timestamp = orm_db.Column(orm_db.DateTime)
+    user_id = orm_db.Column(orm_db.Integer, orm_db.ForeignKey('authenticateduser.id'))
+    language = orm_db.Column(orm_db.String(5))
     
     def __repr__(self): # pragma: no cover
         return '<Post %r>' % (self.body)
