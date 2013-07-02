@@ -3,6 +3,7 @@ from flask.ext.wtf import Required, Length
 from flask.ext.babel import gettext
 
 from app.model.user import User
+from app.model.lease import Lease
 
 class LoginForm(Form):
     openid = TextField('openid', validators = [Required()])
