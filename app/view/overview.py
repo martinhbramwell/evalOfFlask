@@ -4,18 +4,24 @@ from app import app
 from flask.ext.login import login_required, current_user
 # from flask.ext.login import login_user, logout_user
 
-from flask import render_template
-# from flask import flash, redirect, session, url_for, request, g, jsonify
+from flask import render_template, jsonify
+# from flask import flash, redirect, session, url_for, request, g
+
+@app.route('/v1/appl')
+@app.route('/v1/appl/<int:page>')
+def api_appl(page = 1, internal = False):
+    usr = 'Willy'
+    a = ['spam', 'eggs', 100, 1234, 9999]
+    pyld = {'name': usr, 'lstData': a}
+    if internal:
+    	return pyld
+    return jsonify(pyld)
+
 @app.route('/appl')
 @app.route('/appl/<int:page>')
 @login_required
 def appl(page = 1):
-    # user = User.query.filter_by(nickname = nickname).first()
-    # if user == None:
-    #     flash(gettext('User %(nickname)s not found.', nickname = nickname))
-    #     return redirect(url_for('index'))
-    usr = 'Robert'
-    a = ['spam', 'eggs', 100, 1234, 9999]
-    pyld = {'name': usr, 'lstData': a}
+    pyld = api_appl(page, True)
     return render_template('appl.html',
         user = current_user, payload = pyld)
+
