@@ -12,4 +12,11 @@ class PostForm(Form):
     post = TextField('post', validators = [Required()])
     
 class SearchForm(Form):
-    search = TextField('search', validators = [Required()])
+    search = TextField('search', validators = [Required()])    
+
+class LeaseForm(Form):
+    official_id = TextField('Public Record #', validators = [Required()])
+    official_name = TextField('Public Name', validators = [Required()])
+    nick_name = TextField('Code Name', validators = [Required()])
+    contract = TextAreaField('Details', validators = [Length(min = 0, max = 140)])
+

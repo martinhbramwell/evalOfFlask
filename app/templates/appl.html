@@ -3,30 +3,34 @@
 
 {% block content %}
 
-	<h1>{{user.nickname}}</h1>
+	<p>User : <strong>{{user.nickname}}</strong></p>
 
 	{% include 'flash.html' %}
 	
 	<script type="text/javascript">
 		$(document).ready(function(){
+/*
 			$(function() {
-				$('#entityTabs a:first').tab('show');
+				// $('#entityTabs a:first').tab('show');
+				$('#entityTabs a[href="#tb{{ _('Lease') }}"]').tab('show');
 			});
-			
+*/
 			
 			$(window).resize(function(){
         		$(".fullheight").height($(document).height());
     		});
+    		
+    		
 		});
 		
 	</script>
 	
 	<ul class="nav nav-tabs" id="entityTabs">
 		<li><a href="#tbHome" data-toggle="tab">Home</a></li>
-		<li><a href="#tbLease" data-toggle="tab">Leases</a></li>
-		<li><a href="#tbTank" data-toggle="tab">Tank Batteries</a></li>
+        <li><a href="#tbLease" data-toggle="tab">{{ _('Leases') }}</a></li>
+		<li class ="active"><a href="#tbTank" data-toggle="tab">Tank Batteries</a></li>
 		<li><a href="#tbWell" data-toggle="tab">Wells</a></li>
-		<li><a href="#tbInv" data-toggle="tab">Invest</a></li>
+		<li class =""><a href="#tbInv" data-toggle="tab">Invest</a></li>
 		<li><a href="#tbParm" data-toggle="tab">System</a></li>
 	</ul>
 	
@@ -49,7 +53,7 @@
 		
 		<div id="tbLease" class="tab-pane">
 			<p>Leases tab</p>
-			{% include 'lease.html' %}
+            <li><a href="{{ url_for('appl', nickname = g.user.nickname) }}">{{ _('Application') }}</a></li>
 		</div>	
 		
 		<div id="tbTank" class="tab-pane">
@@ -62,7 +66,6 @@
 		
 		<div id="tbInv" class="tab-pane">
 			<p>Investors tab</p>
-			{% include 'investors.html' %}
 		</div>	
 		
 		<div id="tbParm" class="tab-pane">
