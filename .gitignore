@@ -8,6 +8,6 @@ flask
 db_repository
 build
 *.*~
-app/static/css/bootstrap-responsive.css
-app/static/css/bootstrap.css
+bootstrap-responsive.css
+bootstrap.css
 
