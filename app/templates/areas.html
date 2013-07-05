@@ -1,0 +1,39 @@
+
+<script type="text/javascript">
+	$(document).ready(function(){
+/*
+		$(function() {
+			// alert(" * * * " + document.getElementById('tbWell').href);
+			document.getElementById('tbWell').tab('show');
+		});
+*/
+		$(window).resize(function(){
+    		$(".fullheight").height($(document).height());
+		});
+	});
+	
+	
+	
+</script>
+
+{% set navigation = 
+    [
+        ('Home', 'Home', '/')
+      , ('Lease', 'Leases', url_for('lease'))
+      , ('Tank', 'Tank Batteries', url_for('tank'))
+      , ('Well', 'Wells', url_for('well'))
+      , ('Invest', 'Investors', url_for('investor'))
+      , ('Admin', 'Admin', url_for('investor'))
+    ] %}
+
+
+<ul class="nav nav-tabs" id="entityTabs">
+{% for label, title, url in navigation %}
+    {% if label == payload.page %}
+        <li class ="active"><a href="{{ url }}">{{title}}</a></li>
+    {% else %}
+        <li><a href="{{ url }}">{{title}}</a></li>
+    {% endif %}
+{% endfor %}
+</ul>
+

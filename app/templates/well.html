@@ -1,0 +1,15 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+
+	{% include 'flash.html' %}
+	{% include 'areas.html' %}
+	<h3>{{ _('Wells') }}</h3>
+
+	{% for post in posts %}
+		{% include 'recLease.html' %}
+	{% endfor %}
+
+
+{% endblock %}
