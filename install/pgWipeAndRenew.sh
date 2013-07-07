@@ -6,4 +6,3 @@ dropuser flaskeval
 #createuser -SDRW flaskeval
 psql -c "CREATE USER flaskeval WITH PASSWORD 'flaskeval';"
 
-
