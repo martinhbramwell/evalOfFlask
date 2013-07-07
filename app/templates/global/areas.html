@@ -18,19 +18,17 @@
 
 {% set navigation = 
     [
-        ('Home', 'Home', '/')
-      , ('Lease', 'Leases', url_for('lease'))
-      , ('Tank', 'Tank Batteries', url_for('tank'))
+        ('Lease', 'Leases', url_for('lease'))
+      , ('Tank', 'Tanks', url_for('tank'))
       , ('Well', 'Wells', url_for('well'))
-      , ('Invest', 'Investors', url_for('investor'))
-      , ('Admin', 'Admin', url_for('investor'))
+      , ('Stake', 'Stakes', url_for('stake'))
     ] %}
 
 
 <ul class="nav nav-tabs" id="entityTabs">
 {% for label, title, url in navigation %}
     {% if label == payload.page %}
-        <li class ="active"><a href="{{ url }}">{{title}}</a></li>
+        <li class ="active btn-normal-fontus"><a href="{{ url }}">{{title}}</a></li>
     {% else %}
         <li><a href="{{ url }}">{{title}}</a></li>
     {% endif %}

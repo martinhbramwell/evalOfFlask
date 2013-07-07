@@ -1,5 +1,5 @@
 <!-- extend base layout -->
-{% extends "base.html" %}
+{% extends "global/base.html" %}
 
 {% block content %}
 <script type="text/javascript">
@@ -15,7 +15,7 @@ function set_openid(openid, pr)
     form.elements['openid'].value = openid;
 }
 </script>
-{% include 'flash.html' %}
+{% include 'global/flash.html' %}
 <div class="well">
     <h3>{{ _('Please Sign In') }}</h3>
     <form class="form" action="" method="post" name="login">

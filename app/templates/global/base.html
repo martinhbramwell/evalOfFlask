@@ -11,6 +11,7 @@
 	
     <link href="{{ url_for('.static', filename = 'css/bootstrap.min.css') }}" rel="stylesheet" media="screen">
     <link href="{{ url_for('.static', filename = 'css/bootstrap-responsive.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('.static', filename = 'css/fontus.css') }}" rel="stylesheet">
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="{{ url_for('.static', filename = 'js/bootstrap.min.js') }}"></script>
     <script src="{{ url_for('.static', filename = 'js/moment.min.js') }}"></script>
@@ -52,7 +53,7 @@
               <li><a href="{{ url_for('index') }}">{{ _('Home') }}</a></li>
               {% if g.user.is_authenticated() %}
               <li><a href="{{ url_for('user', nickname = g.user.nickname) }}">{{ _('Your Profile') }}</a></li>
-              <li><a href="{{ url_for('appl', nickname = g.user.nickname) }}">{{ _('Application') }}</a></li>
+              <li><a href="{{ url_for('lease', nickname = g.user.nickname) }}">{{ _('Application') }}</a></li>
               {% endif %}
             </ul>
           <div class="nav-collapse collapse pull-right">

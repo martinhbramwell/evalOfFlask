@@ -1,11 +1,11 @@
 <!-- extend base layout -->
-{% extends "base.html" %}
+{% extends "global/base.html" %}
 
 {% block content %}
 
 	<p>User : <strong>{{user.nickname}}</strong></p>
 
-	{% include 'flash.html' %}
+	{% include 'global/flash.html' %}
 	
 	<script type="text/javascript">
 		$(document).ready(function(){

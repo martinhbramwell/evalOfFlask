@@ -1,11 +1,11 @@
 <!-- extend base layout -->
-{% extends "base.html" %}
+{% extends "global/base.html" %}
 
 {% block content %}
 
-	{% include 'flash.html' %}
-	{% include 'areas.html' %}
-	<h3>{{ _('Investors') }}</h3>
+	{% include 'global/flash.html' %}
+	{% include 'global/areas.html' %}
+	<h3>{{ _('Stakes') }}</h3>
 
 	{% for post in posts %}
 		{% include 'recLease.html' %}

@@ -7,7 +7,8 @@ from flask.ext.login import login_required, current_user
 from flask import render_template, jsonify, g
 # from flask import flash, redirect, session, url_for, request
 
-from app.forms.app_forms import LeaseForm
+# from app.forms.app_forms import LeaseForm
+from app.forms.fmLease import LeaseForm
 
 '''
 @app.route('/lease', methods = ['GET', 'POST'])

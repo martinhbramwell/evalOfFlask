@@ -1,8 +1,8 @@
 <!-- extend base layout -->
-{% extends "base.html" %}
+{% extends "global/base.html" %}
 
 {% block content %}
-{% include 'flash.html' %}
+{% include 'global/flash.html' %}
 <div class="well well-large" style="height: 140px;">
     <div class="pull-right">
         <img src="{{user.avatar(128)}}" class="img-polaroid">

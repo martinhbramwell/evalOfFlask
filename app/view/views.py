@@ -45,12 +45,12 @@ def after_request(response):
 
 @app.errorhandler(404)
 def internal_error(error):
-    return render_template('404.html'), 404
+    return render_template('global/404.html'), 404
 
 @app.errorhandler(500)
 def internal_error(error):
     orm_db.session.rollback()
-    return render_template('500.html'), 500
+    return render_template('global/500.html'), 500
 
 @app.route('/', methods = ['GET', 'POST'])
 @app.route('/index', methods = ['GET', 'POST'])
@@ -71,7 +71,7 @@ def index(page = 1):
         flash(gettext('Your post is now live!'))
         return redirect(url_for('index'))
     posts = g.user.followed_posts().paginate(page, POSTS_PER_PAGE, False)
-    return render_template('index.html',
+    return render_template('global/index.html',
         title = 'Home',
         form = form,
         posts = posts)
@@ -85,7 +85,7 @@ def login():
     if form.validate_on_submit():
         session['remember_me'] = form.remember_me.data
         return oid.try_login(form.openid.data, ask_for = ['nickname', 'email'])
-    return render_template('login.html', 
+    return render_template('global/login.html', 
         title = 'Sign In',
         form = form,
         providers = app.config['OPENID_PROVIDERS'])
@@ -215,7 +215,7 @@ def search():
 @login_required
 def search_results(query):
     results = Post.query.whoosh_search(query, MAX_SEARCH_RESULTS).all()
-    return render_template('search_results.html',
+    return render_template('global/search_results.html',
         query = query,
         results = results)
 
