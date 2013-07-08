@@ -3,17 +3,12 @@
 
         <td>
             <p>
-				<strong><span id="post{{post.id}}">{{payload["key"]}}</span></strong>
+				<strong><span id="record{{record.id}}">{{record.nick_name}}</span></strong>
 			</p>
-            {% if g.user.id == g.user.id %}
-			
-            	<div>
-					<a href="{{ url_for('delete', id = g.user.id) }}">
-						{{ _('Delete') }}
-					</a>
-				</div>
-			
-            {% endif %}
+        	<div>
+				[{{record.official_name}}] -- {{record.official_id}} acquired {{record.timestamp}}
+			</div>
         </td>
     </tr>
 </table>
+

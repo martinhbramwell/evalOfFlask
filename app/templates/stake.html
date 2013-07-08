@@ -7,7 +7,7 @@
 	{% include 'global/areas.html' %}
 	<h3>{{ _('Stakes') }}</h3>
 
-	{% for post in posts %}
+	{% for record in payload.records %}
 		{% include 'recLease.html' %}
 	{% endfor %}
 
