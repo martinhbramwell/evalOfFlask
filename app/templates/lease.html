@@ -6,8 +6,6 @@
 	{% include 'global/flash.html' %}
 	{% include 'global/areas.html' %}
 
-    {{payload.key}}
-
     {% if payload.key is defined %}
 		{% include 'lease_edit.html' %}
     {% else %}
