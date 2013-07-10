@@ -12,5 +12,5 @@ class Lease(orm_db.Model):
     user_id = orm_db.Column(orm_db.Integer, orm_db.ForeignKey('authenticateduser.id'))
     
     def __repr__(self): # pragma: no cover
-        return '<Lease %r>' % (self.body)
+        return '<Lease %r>' % (self.official_name)
         
