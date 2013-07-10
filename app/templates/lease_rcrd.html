@@ -1,13 +1,14 @@
 <table class="table table-hover">
     <tr>
-
         <td>
-            <p>
-				<strong><span id="record{{record.id}}">{{record.nick_name}}</span></strong>
-			</p>
+            <a href="{{ url_for('lease', official_id = record.official_id) }}">
+                <p>
+                    <strong><span id="record{{record.id}}">{{record.nick_name}}</span></strong>
+                </p>
+            </a>
         	<div>
-				[{{record.official_name}}] -- {{record.official_id}} acquired {{record.timestamp}}
-			</div>
+                [{{record.official_name}}] -- {{record.official_id}} acquired {{record.timestamp}}
+            </div>
         </td>
     </tr>
 </table>

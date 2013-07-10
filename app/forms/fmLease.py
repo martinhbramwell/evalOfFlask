@@ -15,4 +15,13 @@ class LeaseForm(Form):
         if lease is not None:
             self.the_official_id = lease.official_id
         
+        
+    def validate(self):
+        if not self.official_id.data:
+            self.official_id.data = self.the_official_id
+        if not Form.validate(self):
+            print ' + + + Nope'
+            return False
+        print ' + + + Yup'
+        return True
 

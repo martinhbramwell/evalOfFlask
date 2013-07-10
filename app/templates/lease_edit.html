@@ -7,19 +7,32 @@
         </div>
         {{payload.form.hidden_tag()}}
         <div class="control-group{% if payload.form.errors.post %} error{% endif %}">
-            <label class="control-label" for="nick_name">{{ _('Lease nickname:') }}</label>
+            <label class="control-label" for="official_id">{{ _('Gov&#39;t rec #:') }}</label>
             <div class="controls">
-                {{ payload.form.nick_name(maxlength = 64, class = "span4") }}
-                {% for error in payload.form.errors.nick_name %}
+                {% if payload.key == 'new' %}
+                    {{ payload.form.official_id(cols = 64, rows = 4, class = "span4") }}
+                {% else %}
+                    <strong>{{ payload.form.official_id.data }}</strong>
+                {% endif %}
+                {% for error in payload.form.errors.official_id %}
                     <span class="help-inline">[{{error}}]</span><br>
                 {% endfor %}
             </div>
         </div>
         <div class="control-group{% if payload.form.errors.post %} error{% endif %}">
-            <label class="control-label" for="official_id">{{ _('Gummit rec id#:') }}</label>
+            <label class="control-label" for="official_name">{{ _('Gov&#39;t rec. name:') }}</label>
             <div class="controls">
-                {{ payload.form.official_id(cols = 64, rows = 4, class = "span4") }}
-                {% for error in payload.form.errors.official_id %}
+                {{ payload.form.official_name(maxlength = 64, class = "span4") }}
+                {% for error in payload.form.errors.official_name %}
+                    <span class="help-inline">[{{error}}]</span><br>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="control-group{% if payload.form.errors.post %} error{% endif %}">
+            <label class="control-label" for="nick_name">{{ _('Nickname:') }}</label>
+            <div class="controls">
+                {{ payload.form.nick_name(maxlength = 64, class = "span4") }}
+                {% for error in payload.form.errors.nick_name %}
                     <span class="help-inline">[{{error}}]</span><br>
                 {% endfor %}
             </div>

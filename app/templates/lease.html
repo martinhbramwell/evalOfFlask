@@ -11,7 +11,7 @@
     {% if payload.key is defined %}
 		{% include 'lease_edit.html' %}
     {% else %}
-        <a href="{{ url_for('lease', official_id = 'new') }}">{{ _('New') }}</a>
+        <a href="{{ url_for('newlease')}}">{{ _('New') }}</a>
     {% endif %}
 	<h3>{{ _('Leases') }}</h3>
 
