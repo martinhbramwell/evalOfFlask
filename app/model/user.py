@@ -1,6 +1,6 @@
 from hashlib import md5
 from app import orm_db
-from app import app
+from app import flask_application
 import re
 
 from app.model.post import Post

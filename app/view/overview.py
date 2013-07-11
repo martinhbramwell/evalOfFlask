@@ -1,4 +1,4 @@
-from app import app
+from app import flask_application
 # from app import db, lm, oid, babel
 
 from flask.ext.login import login_required, current_user
@@ -11,7 +11,7 @@ from flask import render_template, jsonify, g
 from app.forms.fmLease import LeaseForm
 
 '''
-@app.route('/lease', methods = ['GET', 'POST'])
+@flask_application.route('/lease', methods = ['GET', 'POST'])
 @login_required
 def editLease():
 		form = LeaseForm(g.user.nickname)
@@ -30,8 +30,8 @@ def editLease():
     return render_template('lease.html')
 '''
 
-@app.route('/v1/appl')
-@app.route('/v1/appl/<int:page>')
+@flask_application.route('/v1/appl')
+@flask_application.route('/v1/appl/<int:page>')
 def api_appl(page = 1, internal = False):
     usr = 'Willy'
     a = ['spam', 'eggs', 100, 1234, 9999]
@@ -40,8 +40,8 @@ def api_appl(page = 1, internal = False):
     	return pyld
     return jsonify(pyld)
 
-@app.route('/appl')
-@app.route('/appl/<int:page>')
+@flask_application.route('/appl')
+@flask_application.route('/appl/<int:page>')
 @login_required
 def appl(page = 1):
     pyld = api_appl(page, True)

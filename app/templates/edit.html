@@ -7,6 +7,12 @@
 <div class="well">
     <form class="form-horizontal" action="" method="post" name="edit">
         {{form.hidden_tag()}}
+        <div class="control-group pull-right">
+            <div class="controls">
+                <input class="btn btn-primary btn-submit-fontus" type="submit" value="{{ _('Save') }}">
+            </div>
+        </div>
+        <hr/>
         <div class="control-group{% if form.errors.post %} error{% endif %}">
             <label class="control-label" for="nickname">{{ _('Your nickname:') }}</label>
             <div class="controls">
@@ -25,11 +31,12 @@
                 {% endfor %}
             </div>
         </div>
-        <div class="control-group">
+        <div class="control-group pull-right">
             <div class="controls">
-                <input class="btn btn-primary" type="submit" value="{{ _('Save Changes') }}">
+                <input class="btn btn-primary btn-submit-fontus" type="submit" value="{{ _('Save') }}">
             </div>
         </div>
+        <hr/>
     </form>
 </div>
 </form>

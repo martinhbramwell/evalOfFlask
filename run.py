@@ -1,5 +1,5 @@
 #!flask/bin/python
-from app import app
+from app import flask_application
 from optparse import OptionParser
 
 def main():
@@ -25,7 +25,7 @@ def main():
         print "Will use Host -- {} and port -- {}.".format(options.nameHost, options.numPort)
 
 
-    app.run(options.nameHost, int(options.numPort), debug = options.debug)
+    flask_application.run(options.nameHost, int(options.numPort), debug = options.debug)
 
 
 if __name__ == "__main__":

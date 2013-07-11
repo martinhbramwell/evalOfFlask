@@ -3,7 +3,7 @@
 
 {% block content %}
 {% include 'global/flash.html' %}
-<div class="well well-large" style="height: 140px;">
+<div class="well well-large">
     <div class="pull-right">
         <img src="{{user.avatar(128)}}" class="img-polaroid">
     </div>
@@ -21,6 +21,7 @@
         <a href="{{url_for('unfollow', nickname = user.nickname)}}">{{ _('Unfollow') }}</a>
     {% endif %}
     </p>
+    <hr/>
 </div>
 
 {% for post in posts.items %}

@@ -1,5 +1,5 @@
 from app import orm_db
-from app import app
+from app import flask_application
 from config import WHOOSH_ENABLED
 
 class Post(orm_db.Model):
@@ -16,4 +16,4 @@ class Post(orm_db.Model):
         
 if WHOOSH_ENABLED:
     import flask.ext.whooshalchemy as whooshalchemy
-    whooshalchemy.whoosh_index(app, Post)
+    whooshalchemy.whoosh_index(flask_application, Post)

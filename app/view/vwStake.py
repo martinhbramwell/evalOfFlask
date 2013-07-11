@@ -1,4 +1,4 @@
-from app import app
+from app import flask_application
 # from app import db, lm, oid, babel
 
 from flask.ext.login import login_required, current_user
@@ -9,9 +9,9 @@ from flask import render_template
 
 from app.model.mdLease import Lease
 
-@app.route('/stake')
-@app.route('/stake/<nickname>')
-@app.route('/stake/<nickname>/<int:page>')
+@flask_application.route('/stake')
+@flask_application.route('/stake/<nickname>')
+@flask_application.route('/stake/<nickname>/<int:page>')
 @login_required
 def stake(page = 1, nickname = 'Ooops!  Bad'):
     aLease = Lease.query.get(2)

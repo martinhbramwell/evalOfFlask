@@ -1,5 +1,5 @@
 from app import orm_db
-from app import app
+# from app import flask_application
 
 class Lease(orm_db.Model):
     
