@@ -3,7 +3,7 @@ from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.login import LoginManager
 from flask.ext.openid import OpenID
-from flask.ext.mail import Mail
+from flask.ext.mail import Mail 
 from flask.ext.babel import Babel, lazy_gettext
 from config import basedir, ADMINS, MAIL_SERVER, MAIL_PORT, MAIL_USERNAME, MAIL_PASSWORD
 from momentjs import momentjs
@@ -31,7 +31,7 @@ from flask.ext.principal import Principal, Permission, RoleNeed
 principals = Principal(flask_application)
 
 # Create a permission with a single Need, in this case a RoleNeed.
-comptroller_permission = Permission(RoleNeed('comptroller'))
+comptroller_permission = Permission(RoleNeed('COMPT'))
 
 ''' Exexcution Profiles '''
 if not flask_application.debug and MAIL_SERVER != '':

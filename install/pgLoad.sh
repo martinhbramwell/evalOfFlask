@@ -4,5 +4,8 @@ psql -c "insert into lease (official_id, official_name, nick_name, contract) val
 ('3e3e', 'Barkersville N44-734', 'Barkers', 'Blabbity, blabbity, blah');" flaskeval
 psql -c "insert into lease (official_id, official_name, nick_name, contract) values 
 ('8e4t', 'Janus D45-888', 'Janus', 'We hold these remarks to be self-contrad...');" flaskeval
+psql -c "insert into role (id,name) values ('ANON', 'Anonymous');" flaskeval
+psql -c "insert into role (id, name) values ('ADMIN', 'Administrator');" flaskeval
+psql -c "insert into role (id, name) values ('COMPT', 'Comptroller');" flaskeval
 
 

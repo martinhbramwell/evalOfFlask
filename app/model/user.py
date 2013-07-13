@@ -4,21 +4,20 @@ from app import flask_application
 import re
 
 from app.model.post import Post
-
-ROLE_USER = 0
-ROLE_ADMIN = 1
-
-followers = orm_db.Table('followers',
-    orm_db.Column('follower_id', orm_db.Integer, orm_db.ForeignKey('authenticateduser.id')),
-    orm_db.Column('followed_id', orm_db.Integer, orm_db.ForeignKey('authenticateduser.id'))
-)
+from app.model.mdRole import Role
+from app.model.mdMany2Many import user_roles, followers
 
 class User(orm_db.Model):
     __tablename__ = 'authenticateduser'
     id = orm_db.Column(orm_db.Integer, primary_key = True)
     nickname = orm_db.Column(orm_db.String(64), unique = True)
     email = orm_db.Column(orm_db.String(120), index = True, unique = True)
-    role = orm_db.Column(orm_db.SmallInteger, default = ROLE_USER)
+    roles = orm_db.relationship('Role', 
+        secondary = user_roles, 
+        primaryjoin = (user_roles.c.user_id == id),
+        backref = orm_db.backref('user_role', lazy = 'dynamic'), 
+        lazy = 'dynamic')
+
     posts = orm_db.relationship('Post', backref = 'author', lazy = 'dynamic')
     about_me = orm_db.Column(orm_db.String(140))
     last_seen = orm_db.Column(orm_db.DateTime)
@@ -45,6 +44,27 @@ class User(orm_db.Model):
             version += 1
         return new_nickname
         
+# Roles methods
+    def takeRole(self, role):
+        if not self.has_role(role):
+            self.roles.append(role)
+            print 'Took role : ' + role.name
+            return self
+            
+    def leaveRole(self, role):
+        if self.has_role(role):
+            self.roles.remove(role)
+            return self
+            
+    def has_role(self, role):
+        return self.roles.filter(user_roles.c.role_id == role.id).count() > 0
+
+    def allowed_roles(self):
+        return Role.query.join(user_roles,
+                (user_roles.c.role_id == Role.id)
+            ).filter(user_roles.c.user_id == self.id)  
+
+# Authentication methods
     def is_authenticated(self):
         return True
 
@@ -59,7 +79,9 @@ class User(orm_db.Model):
 
     def avatar(self, size):
         return 'http://www.gravatar.com/avatar/' + md5(self.email).hexdigest() + '?d=mm&s=' + str(size)
-        
+
+# Follower methods---
+
     def follow(self, user):
         if not self.is_following(user):
             self.followed.append(user)
