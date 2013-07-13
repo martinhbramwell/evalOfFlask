@@ -8,6 +8,7 @@
         <hr/>
         {{payload.form.hidden_tag()}}
         <div class="control-group{% if payload.form.errors.post %} error{% endif %}">
+            <br/>
             <label class="control-label" for="official_id">{{ _('Gov&#39;t rec #:') }}</label>
             <div class="controls">
                 {% if payload.key == 'new' %}
