@@ -1,31 +1,46 @@
 #!flask/bin/python
+import argparse
+import os.path
+
 from app import flask_application
-from optparse import OptionParser
+from install import dbUtil
 
 def main():
 
+    fontus = "A stripper well management tool based on Miguel Grinberg's Flask tutorial."
     usage = "usage: %prog [options] arg"
-    parser = OptionParser(usage)
-    parser.add_option("-s", "--server", dest="nameHost", default="localhost",
+    parser = argparse.ArgumentParser(description=fontus)
+    parser.add_argument("-s", "--server", dest="nameHost", default="localhost",
                       help="host domain name or IP if you do not want 'localhost'")
-    parser.add_option("-p", "--port", dest="numPort", default=8080,
+    parser.add_argument("-p", "--port", dest="numPort", default=8080,
                       help="port to serve out of if you do not want '8088'")
-    parser.add_option("-l", "--live", help="turn off debug mode",
+    parser.add_argument("-l", "--live", help="turn off debug mode",
                       action="store_false", dest="debug")
-    parser.add_option("-d", "--debug", help="turn on debug mode",
+    parser.add_argument("-k", "--kill", help="scrap and remake the database",
+                      action="store_false", dest="debug")
+    parser.add_argument("-d", "--debug", help="turn on debug mode",
                       action="store_true", dest="debug")
-    parser.add_option("-v", "--verbose",
+    parser.add_argument("-v", "--verbose",
                       action="store_true", dest="verbose")
-    parser.add_option("-q", "--quiet",
+    parser.add_argument("-q", "--quiet",
                       action="store_false", dest="verbose")
+                      
+    base_dir = os.path.abspath(os.path.dirname(__file__))
 
-    (options, args) = parser.parse_args()
+    args = parser.parse_args()
     
-    if options.verbose:
-        print "Will use Host -- {} and port -- {}.".format(options.nameHost, options.numPort)
+    if args.verbose:
+        print "Kill"
+        engine = dbUtil.start_engine()
+        dbUtil.drop(base_dir, engine)
+        dbUtil.create()
+        dbUtil.load(engine)
+        
+    if args.verbose:
+        print "Will use Host -- {} and port -- {}.".format(args.nameHost, args.numPort)
 
 
-    flask_application.run(options.nameHost, int(options.numPort), debug = options.debug)
+    flask_application.run(args.nameHost, int(args.numPort), debug = args.debug)
 
 
 if __name__ == "__main__":
