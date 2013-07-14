@@ -16,7 +16,7 @@ def main():
                       help="port to serve out of if you do not want '8088'")
     parser.add_argument("-l", "--live", help="turn off debug mode",
                       action="store_false", dest="debug")
-    parser.add_argument("-k", "--kill", help="scrap and remake the database",
+    parser.add_argument("-g", "--regenerate", help="scrap and remake the database",
                       action="store_false", dest="debug")
     parser.add_argument("-d", "--debug", help="turn on debug mode",
                       action="store_true", dest="debug")
@@ -30,7 +30,7 @@ def main():
     args = parser.parse_args()
     
     if args.verbose:
-        print "Kill"
+        print "Regenerate"
         engine = dbUtil.start_engine()
         dbUtil.drop(base_dir, engine)
         dbUtil.create()
@@ -47,5 +47,5 @@ if __name__ == "__main__":
     main()
 	
 
-# Example :    ./run.py -s www.matrixoflife.net -p 8088 -d &
+# Example :    ./run.py -vdg -s www.matrixoflife.net -p 8088 &
 
