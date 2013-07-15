@@ -50,10 +50,13 @@
           </a>
           <a class="brand" href="{{ url_for('index') }}">Fontus</a>
             <ul class="nav">
-              <!-- li><a href="{{ url_for('index') }}">{{ _('Home') }}</a></li -->
               {% if g.user.is_authenticated() %}
-              <li><a href="{{ url_for('user', nickname = g.user.nickname) }}">{{ _('Your Profile') }}</a></li>
-              <li><a href="{{ url_for('leases') }}">{{ _('Application') }}</a></li>
+                  {% if g.user.has_named_role("ADMIN") %}
+                      <li><a href="{{ url_for('users') }}">{{ _("Users' Profiles") }}</a></li>
+                  {% else %}
+                      <li><a href="{{ url_for('user', nickname = g.user.nickname) }}">{{ _('Your Profile') }}</a></li>
+                  {% endif %}
+                  <li><a href="{{ url_for('leases') }}">{{ _('Application') }}</a></li>
               {% endif %}
             </ul>
           <div class="nav-collapse collapse pull-right">

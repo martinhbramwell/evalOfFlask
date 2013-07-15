@@ -32,6 +32,7 @@ principals = Principal(flask_application)
 
 # Create a permission with a single Need, in this case a RoleNeed.
 comptroller_permission = Permission(RoleNeed('COMPT'))
+administrator_permission = Permission(RoleNeed('ADMIN'))
 
 ''' Exexcution Profiles '''
 if not flask_application.debug and MAIL_SERVER != '':
@@ -63,7 +64,7 @@ if os.environ.get('HEROKU') is not None:
 
 flask_application.jinja_env.globals['momentjs'] = momentjs
 
-from app.view import views, overview, vwLease, vwStake, vwTank, vwWell
+from app.view import views, overview, vwLease, vwUser, vwStake, vwTank, vwWell
 # from flask_application import view
 from app import model
 

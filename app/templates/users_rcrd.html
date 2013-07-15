@@ -1,0 +1,19 @@
+<tr>
+    <td>
+        <a href="{{ url_for('users', official_id = record.official_id) }}">
+            <strong><span id="record{{record.id}}">{{record.nickname}}</span></strong>
+        </a>
+        <br/>
+       	{% for role in record.roles %}
+       	    <button class="btn btn-mini" type="button">{{role.name}}</button>
+       	{% endfor %}
+    </td>
+    <td>
+        {{record.email}}
+        <br/>
+        {% if record.last_seen %}
+        <p><em>{{ _('Last seen:') }} {{ momentjs(record.last_seen).calendar() }}</em></p>
+        {% endif %}
+    </td>
+</tr>
+

@@ -1,0 +1,23 @@
+<!-- extend base layout -->
+{% extends "global/base.html" %}
+
+{% block content %}
+
+	{% include 'global/flash.html' %}
+
+    {% if payload.key is defined %}
+		{% include 'users_edit.html' %}
+    {% else %}
+        <a href="{{ url_for('newuser')}}">{{ _('New') }}</a>
+    {% endif %}
+	<h3>{{ _('Users') }}</h3>
+
+    <table class="table table-hover">
+	    {% for record in payload.records %}
+		    {% include 'users_rcrd.html' %}
+	    {% endfor %}
+    </table>
+
+
+
+{% endblock %}

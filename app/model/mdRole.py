@@ -16,5 +16,5 @@ class Role(orm_db.Model):
         lazy = 'dynamic')
     
     def __repr__(self): # pragma: no cover
-        return '<Role %r>' % (self.body)
+        return '<Role %r>' % (self.id)
 

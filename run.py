@@ -12,24 +12,27 @@ def main():
     parser = argparse.ArgumentParser(description=fontus)
     parser.add_argument("-s", "--server", dest="nameHost", default="localhost",
                       help="host domain name or IP if you do not want 'localhost'")
-    parser.add_argument("-p", "--port", dest="numPort", default=8080,
-                      help="port to serve out of if you do not want '8088'")
-    parser.add_argument("-l", "--live", help="turn off debug mode",
-                      action="store_false", dest="debug")
+    parser.add_argument("-p", "--port", dest="numPort", default=80,
+                      help="port to serve out of if you do not want '80'")
+
     parser.add_argument("-g", "--regenerate", help="scrap and remake the database",
-                      action="store_false", dest="debug")
+                      action="store_true", dest="regenerate", default=False)
+
+    parser.add_argument("-l", "--live", help="turn off debug mode",
+                      action="store_false", dest="debug", default=False)
     parser.add_argument("-d", "--debug", help="turn on debug mode",
-                      action="store_true", dest="debug")
+                      action="store_true", dest="debug", default=False)
+
     parser.add_argument("-v", "--verbose",
-                      action="store_true", dest="verbose")
+                      action="store_true", dest="verbose", default=False)
     parser.add_argument("-q", "--quiet",
-                      action="store_false", dest="verbose")
+                      action="store_false", dest="verbose", default=False)
                       
     base_dir = os.path.abspath(os.path.dirname(__file__))
 
     args = parser.parse_args()
     
-    if args.verbose:
+    if args.regenerate:
         print "Regenerate"
         engine = dbUtil.start_engine()
         dbUtil.drop(base_dir, engine)

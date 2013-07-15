@@ -19,7 +19,7 @@ class User(orm_db.Model):
         lazy = 'dynamic')
 
     posts = orm_db.relationship('Post', backref = 'author', lazy = 'dynamic')
-    about_me = orm_db.Column(orm_db.String(140))
+    about_me = orm_db.Column(orm_db.String(512))
     last_seen = orm_db.Column(orm_db.DateTime)
     followed = orm_db.relationship('User', 
         secondary = followers, 
@@ -56,6 +56,9 @@ class User(orm_db.Model):
             self.roles.remove(role)
             return self
             
+    def has_named_role(self, roleKey):
+        return self.roles.filter(user_roles.c.role_id == roleKey).count() > 0
+
     def has_role(self, role):
         return self.roles.filter(user_roles.c.role_id == role.id).count() > 0
 

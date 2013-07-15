@@ -4,9 +4,11 @@ from flask.ext.babel import gettext
 
 from app.model.mdUser import User
 
-class EditForm(Form):
+class UserForm(Form):
     nickname = TextField('nickname', validators = [Required()])
     about_me = TextAreaField('about_me', validators = [Length(min = 0, max = 140)])
+    email = TextField('email', validators = [Required(), Length(min = 0, max = 120)])
+    roles = TextField('roles', validators = [Required(), Length(min = 5, max = 10)])
     
     def __init__(self, original_nickname, *args, **kwargs):
         Form.__init__(self, *args, **kwargs)
@@ -25,4 +27,5 @@ class EditForm(Form):
             self.nickname.errors.append(gettext('This nickname is already in use. Please choose another one.'))
             return False
         return True
+
 

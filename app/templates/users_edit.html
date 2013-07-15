@@ -1,0 +1,62 @@
+<div class="well">
+    <form class="form-horizontal" action="" method="post" name="user">
+        <div class="control-group pull-right">
+            <div class="controls">
+                <input class="btn btn-primary btn-submit-fontus" type="submit" value="{{ _('Save') }}">
+            </div>
+        </div>
+        <hr/>
+        
+about_me,  roles
+        
+        {{payload.form.hidden_tag()}}
+        <div class="control-group{% if payload.form.errors.post %} error{% endif %}">
+            <br/>
+            <label class="control-label" for="nickname">{{ _('Nick name #:') }}</label>
+            <div class="controls">
+                {% if payload.key == 'new' %}
+                    {{ payload.form.nickname(cols = 64, rows = 4) }}
+                {% else %}
+                    <h3>{{ payload.form.nickname.data }}</h3>
+                {% endif %}
+                {% for error in payload.form.errors.nickname %}
+                    <span class="help-inline">[{{error}}]</span><br>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="control-group{% if payload.form.errors.post %} error{% endif %}">
+            <label class="control-label" for="roles">{{ _('Roles:') }}</label>
+            <div class="controls">
+                {{ payload.form.roles(maxlength = 120, class = "span4") }}
+                {% for error in payload.form.errors.roles %}
+                    <span class="help-inline">[{{error}}]</span><br>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="control-group{% if payload.form.errors.post %} error{% endif %}">
+            <label class="control-label" for="email">{{ _('eMail address:') }}</label>
+            <div class="controls">
+                {{ payload.form.email(maxlength = 120, class = "span4") }}
+                {% for error in payload.form.errors.email %}
+                    <span class="help-inline">[{{error}}]</span><br>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="control-group{% if payload.form.errors.post %} error{% endif %}">
+            <label class="control-label" for="about_me">{{ _('Notes:') }}</label>
+            <div class="controls">
+                {{ payload.form.about_me(cols = 64, rows = 4, class = "span4") }}
+                {% for error in payload.form.errors.about_me %}
+                    <span class="help-inline">[{{error}}]</span><br>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="control-group pull-right">
+            <div class="controls">
+                <input class="btn btn-primary btn-submit-fontus" type="submit" value="{{ _('Save') }}">
+            </div>
+        </div>
+        <hr/>
+    </form>
+</div>
+

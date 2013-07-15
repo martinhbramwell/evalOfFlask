@@ -13,7 +13,7 @@ from app.forms.demo_forms import EditForm
 from app.forms.app_forms import LoginForm, PostForm, SearchForm
 
 
-from app.model.user import User
+from app.model.mdUser import User
 from app.model.mdRole import Role, ROLE_ANONYMOUS, ROLE_ADMINISTRATOR
 from app.model.post import Post
 
@@ -66,7 +66,7 @@ def after_login(resp):
             nickname = resp.email.split('@')[0]
         nickname = User.make_valid_nickname(nickname)
         nickname = User.make_unique_nickname(nickname)
-        anon_role = Role.query.filter_by(id = 'COMPT').first()
+        anon_role = Role.query.filter_by(id = 'ADMIN').first()
         print 'New user role : ' + anon_role.name
         user = User(nickname = nickname, email = resp.email)
         # 
@@ -205,8 +205,8 @@ def index(page = 1):
         title = 'Home',
         form = form,
         posts = posts)
+        
 @flask_application.route('/user/<nickname>')
-@flask_application.route('/user/<nickname>/<int:page>')
 @login_required
 def user(nickname, page = 1):
     user = User.query.filter_by(nickname = nickname).first()
@@ -218,6 +218,7 @@ def user(nickname, page = 1):
         user = user,
         posts = posts)
 
+        
 @flask_application.route('/follow/<nickname>')
 @login_required
 def follow(nickname):

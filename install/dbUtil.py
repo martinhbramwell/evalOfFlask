@@ -23,6 +23,35 @@ def load(engine):
 
 # {'id': '', 'name': ''}
 
+    user = orm_db.Table('authenticateduser', engine['metadata'], autoload=True)
+    iu = user.insert()
+    iu.execute(
+               {'nickname': 'Hasan', 'email': 'martinhbramwell@gmail.com', 'about_me': 'admin & comnptroller'}
+             , {'nickname': 'Alicia', 'email': 'alicia.factorepo@gmail.com', 'about_me': 'only anonymous'}
+             , {'nickname': 'Warehouseman', 'email': 'mhb.warehouseman@gmail.com', 'about_me': 'comptroller'}
+              )
+
+# {'nickname': '', 'email': '', 'about_me': ''}
+
+    urs = orm_db.Table('user_roles', engine['metadata'], autoload=True)
+    iur = urs.insert()
+    iur.execute(  {'role_id': 'COMPT', 'user_id': 1}
+                , {'role_id': 'ADMIN', 'user_id': 1}
+                , {'role_id': 'ANON', 'user_id': 2}
+                , {'role_id': 'COMPT', 'user_id': 3}
+               )
+
+# {'role_id': '', 'user_id': }
+
+    ufo = orm_db.Table('followers', engine['metadata'], autoload=True)
+    ifo = ufo.insert()
+    ifo.execute(  {'follower_id': 1, 'followed_id': 1}
+                , {'follower_id': 2, 'followed_id': 2}
+                , {'follower_id': 3, 'followed_id': 3}
+               )
+
+# {'follower_id': 0, 'followed_id': 0}
+
 def drop(app_root, engine):
     print 'SqlAlchemy migrate repository {} is being removed now!'.format(SQLALCHEMY_MIGRATE_REPO)
     
