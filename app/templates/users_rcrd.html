@@ -5,7 +5,14 @@
         </a>
         <br/>
        	{% for role in record.roles %}
-       	    <button class="btn btn-mini" type="button">{{role.name}}</button>
+       	    <button id="btn{{role.id}}{{record.id}}" class="btn btn-mini" type="button">{{role.name}}</button>
+            <script>
+                $(function(){
+                    $('#btn{{role.id}}{{record.id}}').on('click', function (e) {
+                        window.location = "/role/{{role.id}}"
+                    });
+                });
+            </script>
        	{% endfor %}
     </td>
     <td>

@@ -1,0 +1,22 @@
+<!-- extend base layout -->
+{% extends "global/base.html" %}
+
+{% block content %}
+
+	{% include 'global/flash.html' %}
+	{% include 'global/areas.html' %}
+
+    <a href="{{ url_for('newrole')}}">{{ _('New') }}</a>
+
+    {% if payload.key is defined %}
+		{% include 'role_edit.html' %}
+    {% endif %}
+    
+	<h3>{{ _('Roles') }}</h3>
+
+	{% for record in payload.records %}
+		{% include 'role_rcrd.html' %}
+	{% endfor %}
+
+
+{% endblock %}

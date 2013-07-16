@@ -36,7 +36,7 @@ def load(engine):
     urs = orm_db.Table('user_roles', engine['metadata'], autoload=True)
     iur = urs.insert()
     iur.execute(  {'role_id': 'COMPT', 'user_id': 1}
-                , {'role_id': 'ADMIN', 'user_id': 1}
+                , {'role_id': 'ADMIN', 'user_id': 3}
                 , {'role_id': 'ANON', 'user_id': 2}
                 , {'role_id': 'COMPT', 'user_id': 3}
                )

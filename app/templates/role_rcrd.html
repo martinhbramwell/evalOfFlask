@@ -1,0 +1,20 @@
+<tr>
+    <td>
+        <a href="{{ url_for('role', role_id = record.id) }}">
+            <strong><span id="record{{record.id}}">{{record.id}}</span></strong>
+        </a>
+        <br/>
+       	{% for user in record.users %}
+       	    <button id="btn{{record.id}}{{user.nickname}}" class="btn btn-mini" type="button">{{user.nickname}}</button>
+            <script>
+                $(function(){
+                    $('#btn{{record.id}}{{user.nickname}}').on('click', function (e) {
+                        window.location = "/user/{{user.nickname}}"
+                    });
+                });
+            </script>
+       	{% endfor %}
+       	<hr/>
+    </td>
+</tr>
+

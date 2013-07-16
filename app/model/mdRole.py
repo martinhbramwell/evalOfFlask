@@ -7,7 +7,7 @@ ROLE_ADMINISTRATOR = 'ADMIN'
 
 class Role(orm_db.Model):
     
-    id = orm_db.Column(orm_db.String(16), primary_key = True)
+    id = orm_db.Column(orm_db.String(8), primary_key = True)
     name = orm_db.Column(orm_db.String(64))
     users = orm_db.relationship('User', 
         secondary = user_roles, 
