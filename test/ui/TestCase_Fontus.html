@@ -42,9 +42,49 @@
 	<td>Say something:</td>
 </tr>
 <tr>
+	<td>assertText</td>
+	<td>css=label.control-label</td>
+	<td>Say something:</td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>link=Application</td>
 	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Stakes</td>
+	<td>Stakes</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Wells</td>
+	<td>Wells</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Tanks</td>
+	<td>Tanks</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Leases</td>
+	<td>Leases</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=New</td>
+	<td>New</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=record1</td>
+	<td>Barkers....</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=record2</td>
+	<td>Barkers....</td>
 </tr>
 <tr>
 	<td>assertTitle</td>
@@ -57,14 +97,24 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTitle</td>
-	<td>Fontus</td>
-	<td></td>
+	<td>assertText</td>
+	<td>link=Application</td>
+	<td>Application</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Stakes</td>
+	<td>Stakes</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Leases</td>
 	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=td &gt; div</td>
+	<td>[Barkersville N44-734] -- 3e3e acquired None</td>
 </tr>
 <tr>
 	<td>assertTitle</td>
@@ -75,6 +125,16 @@
 	<td>clickAndWait</td>
 	<td>css=p</td>
 	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=label.control-label</td>
+	<td>Gov't rec #:</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[4]/label</td>
+	<td>Gov't rec. name:</td>
 </tr>
 <tr>
 	<td>assertTitle</td>
@@ -92,14 +152,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTitle</td>
-	<td>Fontus</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Your Profile</td>
-	<td></td>
+	<td>assertText</td>
+	<td>css=div.alert.alert-success</td>
+	<td>× Your changes have been saved.</td>
 </tr>
 <tr>
 	<td>assertTitle</td>
@@ -107,91 +162,10 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>link=Edit your profile</td>
-	<td></td>
+	<td>assertText</td>
+	<td>css=html</td>
+	<td>Users' Profiles</td>
 </tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Fontus</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=about_me</td>
-	<td>admin &amp; comptroller.<br /></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>xpath=(//input[@value='Save'])[2]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Fontus</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Fontus</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Home - Fontus</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=post</td>
-	<td>Delete me.</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@value='Post!']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Home - Fontus</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Delete</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Home - Fontus</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=post</td>
-	<td>Done</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@value='Post!']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Home - Fontus</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Logout</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Sign In - Fontus</td>
-	<td></td>
-</tr>
-
 </tbody></table>
 </body>
 </html>
