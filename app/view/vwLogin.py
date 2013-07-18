@@ -9,10 +9,12 @@ from flask.ext.principal import UserNeed, RoleNeed
 
 from app import flask_application, login_manager
 from app import openID_service
+from app import orm_db
 
 from app.forms.app_forms import LoginForm#, PostForm, SearchForm
 
 from app.model.mdUser import User
+from app.model.mdRole import Role
 
 # login stuff ----------------------
 
