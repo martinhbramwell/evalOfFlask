@@ -10,7 +10,25 @@
     {% endif %}
     
     <a href="{{ url_for('newuser')}}">{{ _('New') }}</a>
+    <div class="pull-right"><a id="deleteLink" href="">{{ _('Delete') }}</a></div>
     
+    <script>
+        function MyFunction() {
+            var checkboxes = document.getElementsByName('chkUser');
+            var stripper = "user_".length;
+            var vals = "";
+            for (var i = 0,  n = checkboxes.length;  i < n ;  i++) {
+                if (checkboxes[i].checked) vals += "," + checkboxes[i].id.substring(stripper);
+            }
+            if (vals) vals = vals.substring(1); // drop leading comma
+            confirm("Truly delete : " + vals);
+            return false;
+        }
+
+        $('#deleteLink').click(function(){ MyFunction(); return false; });
+                
+    </script>
+
 	<h3>{{ _('Users') }}</h3>
 
     <table class="table table-hover">
@@ -18,7 +36,6 @@
 		    {% include 'users_rcrd.html' %}
 	    {% endfor %}
     </table>
-
 
 
 {% endblock %}

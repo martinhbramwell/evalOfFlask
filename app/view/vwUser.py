@@ -4,7 +4,6 @@ from flask.ext.babel import gettext
 from flask import render_template, flash, request, redirect, url_for
 
 from app import administrator_permission
-from flask import Response
 
 from app.model.mdUser import User
 from app.forms.fmUser import UserForm
@@ -33,9 +32,10 @@ def newuser():
         return redirect(url_for('users'))
 
 def saveIt(user, form):
-        user.nick_name = form.nick_name.data
-        user.official_id = form.official_id.data
-        user.official_name = form.official_name.data
+        user.nickname = form.nickname.data
+        user.about_me = form.about_me.data
+        user.email = form.email.data
+        
         orm_db.session.add(user)
         orm_db.session.commit()
         flash(gettext('Your changes have been saved.'), 'success')

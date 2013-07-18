@@ -1,5 +1,7 @@
 import os
 from flask import Flask
+from flask import Response
+
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.login import LoginManager
 from flask.ext.openid import OpenID
@@ -11,6 +13,8 @@ from momentjs import momentjs
 flask_application = Flask(__name__)
 flask_application.config.from_object('config')
 orm_db = SQLAlchemy(flask_application)
+
+resp = Response
 
 login_manager = LoginManager()
 login_manager.init_app(flask_application)
@@ -24,7 +28,6 @@ mail = Mail(flask_application)
 babel = Babel(flask_application)
 
 ''' Flask - Principal '''
-from flask import Flask, Response
 from flask.ext.principal import Principal, Permission, RoleNeed
 
 # load the extension

@@ -52,3 +52,6 @@ if __name__ == "__main__":
 
 # Example :    ./run.py -vdg -s www.matrixoflife.net -p 8088 &
 
+# find . -name "*.py~" -print0 | xargs -0 rm -rf  && find . -name "*.pyc" -print0 | xargs -0 rm -rf
+# grep -R --exclude-dir=flask "Response" .  2>/dev/null
+

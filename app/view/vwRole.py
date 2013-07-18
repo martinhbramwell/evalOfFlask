@@ -4,7 +4,7 @@ from flask.ext.babel import gettext
 from flask import render_template, flash, request, redirect, url_for
 
 from app import administrator_permission
-from flask import Response
+# from flask import Response
 
 from app.model.mdRole import Role
 from app.forms.fmRole import RoleForm

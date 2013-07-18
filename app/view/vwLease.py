@@ -10,7 +10,7 @@ from flask import render_template, flash, request, redirect, url_for
 # from flask import flash, session, g, jsonify
 
 from app import comptroller_permission
-from flask import Response
+# from flask import Response
 
 from app.model.mdLease import Lease
 from app.forms.fmLease import LeaseForm
@@ -67,7 +67,7 @@ def renderIt(pyld):
 
 def renderThem(pyld):
     pyld['page'] = 'Lease'
-    pyld['records'] = Lease.query.filter() # .paginate(page, POSTS_PER_PAGE, False)
+    pyld['records'] = Lease.query.filter().order_by(Lease.id) # .paginate(page, POSTS_PER_PAGE, False)
     return render_template('lease.html', payload = pyld)
 
 
