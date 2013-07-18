@@ -12,6 +12,11 @@
 <tr><td rowspan="1" colspan="3">TestCase_FontusAdmin</td></tr>
 </thead><tbody>
 <tr>
+	<td>assertTextPresent</td>
+	<td>Users' Profiles</td>
+	<td></td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>/users</td>
 	<td></td>
@@ -45,6 +50,11 @@
 	<td>clickAndWait</td>
 	<td>xpath=(//input[@value='Save'])[2]</td>
 	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=div.alert.alert-success</td>
+	<td>× Your changes have been saved.</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -95,16 +105,6 @@
 	<td>assertText</td>
 	<td>css=h1</td>
 	<td>Warehouseman</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=a.btn.btn-navbar</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Logout</td>
-	<td></td>
 </tr>
 </tbody></table>
 </body>
