@@ -1,0 +1,52 @@
+<!-- extend base layout -->
+{% extends "global/base.html" %}
+
+{% block content %}
+
+	{% include 'global/flash.html' %}
+
+	<h3>{{ _('Users to be Deleted NOW') }}</h3>
+
+    <table class="table table-hover">
+	    {% for record in payload.records %}
+        <tr>
+            <td>
+                <a href="{{ url_for('users', official_id = record.official_id) }}">
+                    <strong><span id="record{{record.id}}">{{record.nickname}}</span></strong>
+                </a>
+                    : {{record.email}}
+            </td>
+        </tr>
+	    {% endfor %}
+    </table>
+
+    <form class="form-horizontal" action="" method="post" name="deleteUser">
+        {{ payload.form.hidden_tag() }}
+        <div class="control-group{% if payload.form.errors.post %} error{% endif %}">
+            <div class="controls">
+                {{ payload.form.drop() }}
+                {% for error in payload.form.errors.drop %}
+                    <span class="help-inline">[{{error}}]</span><br>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <input class="btn btn-delete-fontus btn-primary" type="submit" value="{{ _('Delete') }}">
+           	    <button id="btnCancel" class="btn btn-normal-fontus pull-right" type="button">{{ _('Cancel') }}</button>
+            </div>
+        </div>
+        <hr/>
+        
+         <script>
+            $(function(){
+                $('#btnCancel').on('click', function (e) {
+                    window.location = "/users"
+                });
+            });
+        </script>
+
+    </form>
+
+{% endblock %}
+

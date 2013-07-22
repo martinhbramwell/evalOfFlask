@@ -1,4 +1,4 @@
-from flask.ext.wtf import Form, TextField, BooleanField, TextAreaField
+from flask.ext.wtf import Form, TextField, BooleanField, HiddenField
 from flask.ext.wtf import Required, Length
 from flask.ext.babel import gettext
 
@@ -8,6 +8,10 @@ class LoginForm(Form):
     
 class PostForm(Form):
     post = TextField('post', validators = [Required()])
+    
+class DeleteRecordsForm(Form):
+#    drop = TextField('drop', validators = [None])
+    drop = HiddenField('drop', validators = [Required()])
     
 class SearchForm(Form):
     search = TextField('search', validators = [Required()])    

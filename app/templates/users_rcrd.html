@@ -1,6 +1,10 @@
 <tr>
     <td>
         <input type="checkbox" id="user_{{record.id}}" name="chkUser">
+            <script>
+                recUserId[pass++] = '{{record.id}}';
+                recUserName['{{record.id}}'] = '{{record.nickname}}';
+            </script>
     </td>
     <td>
         <a href="{{ url_for('users', official_id = record.official_id) }}">

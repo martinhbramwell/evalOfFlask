@@ -13,20 +13,44 @@
     <div class="pull-right"><a id="deleteLink" href="">{{ _('Delete') }}</a></div>
     
     <script>
-        function MyFunction() {
+    
+
+
+        var pass = 0;
+        var recUserId = {};
+        var recUserName = {};
+        
+            
+        function funcDelete() {
             var checkboxes = document.getElementsByName('chkUser');
-            var stripper = "user_".length;
-            var vals = "";
+            var prefix = "user_".length
+            var ids = names = "";
+            
+            pass = 0;
+            recUserId = {};
+        
             for (var i = 0,  n = checkboxes.length;  i < n ;  i++) {
-                if (checkboxes[i].checked) vals += "," + checkboxes[i].id.substring(stripper);
+                if (checkboxes[i].checked)
+                {
+                    recUserId[pass] = checkboxes[i].id.substring(prefix);
+                    names += ", " + recUserName[recUserId[pass]];
+                    ids += ", " + recUserId[pass];
+                    pass++;
+                }
             }
-            if (vals) vals = vals.substring(1); // drop leading comma
-            confirm("Truly delete : " + vals);
+            if (pass > 0) {
+                var cut = names.lastIndexOf(",");
+                if (pass > 1) {
+                    names = names.slice(0, cut) + " &" + names.slice(cut+1)
+                }
+                // confirm("Definitely delete " + names.substring(2) + "? (" + ids.substring(2) + ")");
+            }
+            location.assign("/deluser?id=" + ids.substring(2).replace(/\s+/g, ''));
             return false;
         }
-
-        $('#deleteLink').click(function(){ MyFunction(); return false; });
-                
+    
+        $('#deleteLink').click(function(){ funcDelete(); return false; });
+        
     </script>
 
 	<h3>{{ _('Users') }}</h3>
@@ -39,3 +63,4 @@
 
 
 {% endblock %}
+

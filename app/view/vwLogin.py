@@ -94,7 +94,7 @@ def logout():
     for key in ('identity.name', 'identity.auth_type'):
         session.pop(key, None)
 
-    print ' ** ** ** ' + str(current_app._get_current_object())
+    # # print ' ** ** ** ' + str(current_app._get_current_object())
     # Tell Flask-Principal the user is anonymous
     identity_changed.send(current_app._get_current_object(),
                           identity=AnonymousIdentity())
@@ -108,21 +108,24 @@ def on_identity_loaded(sender, identity):
     # Set the identity user object
     identity.user = current_user
 
-    print ' $$$$$$$ ' + str(current_user) + ' $$$$$$$ ' + str(current_user.__dict__.keys()) + ' $$$$$$$ '
+    # # print ' $$$$$$$ ' + str(current_user) + ' $$$$$$$ ' + str(current_user.__dict__.keys()) + ' $$$$$$$ '
     
     # Add the UserNeed to the identity
     if hasattr(current_user, 'id'):
-        print ' - - - needs'
+        # # print ' - - - needs'
         identity.provides.add(UserNeed(current_user.id))
 
     # Assuming the User model has a list of roles, update the
     # identity with the roles that the user provides
     if hasattr(current_user, 'roles'):
-        print ' - - - may'
+        # print ' - - - may'
+        msg = 'Acts as: ';
+        sep = '';
         for role in current_user.roles:
-            print 'act as ' + str(role.name)
+            msg += sep + str(role.name);
+            sep = ', ';
             identity.provides.add(RoleNeed(role.id))
-                
+        print msg;
 # end of login stuff ----------------------
 
 

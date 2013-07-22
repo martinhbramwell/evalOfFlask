@@ -4,26 +4,41 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="http://fontus/" />
-<title>Fontus Logout</title>
+<title>Test Case: Delete User</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">Fontus Logout</td></tr>
+<tr><td rowspan="1" colspan="3">Test Case: Delete User</td></tr>
 </thead><tbody>
 <tr>
+	<td>assertTextPresent</td>
+	<td>Users' Profiles</td>
+	<td></td>
+</tr>
+<tr>
 	<td>open</td>
-	<td>/index</td>
+	<td>/users</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//span[3]</td>
+	<td>id=user_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user_2</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Logout</td>
+	<td>id=deleteLink</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeConfirmation</td>
+	<td>Definitely delete Warehouseman &amp; Alicia? (3, 2)</td>
 	<td></td>
 </tr>
 </tbody></table>
