@@ -10,4 +10,5 @@ build
 *.*~
 bootstrap-responsive.css
 bootstrap.css
+test/tmp
 

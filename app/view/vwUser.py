@@ -70,13 +70,12 @@ def deluser():
 @flask_application.route('/newuser', methods = ['GET', 'POST'])
 @login_required
 def newuser():
-    print 'newuser'
+
     if administrator_permission.can():
 
         user = User()
         form = UserForm(user)
         if form.validate_on_submit():
-            print 'saving * * * * '
             return saveIt(user, form)
         return renderIt('users.html', {'key': 'new', 'form': form})
     else:
@@ -90,7 +89,7 @@ def saveIt(user, form):
         
         orm_db.session.add(user)
         orm_db.session.commit()
-        flash(gettext('Your changes have been saved.'), 'success')
+        flash(gettext('Your new user: {} ({}), has been saved.'.format(user.nickname, user.id)), 'success')
         return redirect(url_for('users'))
 
 def renderIt(end_point, pyld):
