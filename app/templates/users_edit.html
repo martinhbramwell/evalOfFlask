@@ -1,5 +1,5 @@
 <div class="well">
-    <form class="form-horizontal" action="" method="post" name="user">
+    <form class="form-horizontal" action="" method="post" name="user" id="frmUserEdit">
         <div class="control-group pull-right">
             <div class="controls">
                 <input class="btn btn-primary btn-submit-fontus" type="submit" value="{{ _('Save') }}">
@@ -21,8 +21,86 @@
                 {% endfor %}
             </div>
         </div>
+
+        <script>
+            var roleIds = [];
+            var roleSelected = [];
+            var slctANON = true;
+            
+            function indexOfCurrent (current) {
+                for (var ii = 0 ; ii < roleIds.length ; ii++) {
+                    if (current == roleIds[ii]) return ii;
+                }
+                return -1;
+            }
+            
+            function howMany (current) {
+                var cnt = 0;
+                for (var ii = 0 ; ii < roleIds.length ; ii++) {
+                    if (roleSelected[ii]) {
+                        cnt++;
+                    }
+                }
+                return cnt;
+            }
+            
+            function ensureAtLeastOne(current) {
+                var slctdCount = howMany();
+                if (current == 'ANON') {
+                    if (slctdCount < 1 && slctANON) {
+                        $('#ANON').button('toggle');
+                        return false;
+                    }
+                    slctANON = ! slctANON;
+                    return true;
+                }
+                idxCurrent = indexOfCurrent(current);
+                if (roleSelected[idxCurrent]) {
+                    if (slctdCount < 2 ) {
+                        if ( ! slctANON) {
+                            $('#ANON').button('toggle');
+                            slctANON = true;
+                        }
+                    }
+                }
+                roleSelected[idxCurrent] = ! roleSelected[idxCurrent];
+                return true;                
+
+            }
+            
+        </script>
+        
         <div class="control-group{% if payload.form.errors.post %} error{% endif %}">
             <label class="control-label" for="roles">{{ _('Roles:') }}</label>
+            <div class="controls" data-toggle="buttons-checkbox">
+	            {% for role in payload.roles %}	                 
+                    {% if role.id == 'ANON' %}
+                        <button name="btnRole" id="{{ role.id }}" class="btn btn-mini active" type="button">
+                            {{ role.name }}
+                        </button>
+                        <script>
+                            slctANON = true;
+                        </script>
+                    {% else %}
+                        <button name="btnRole" id="{{ role.id }}" class="btn btn-mini" type="button">
+                            {{ role.name }}
+                        </button>
+                        <script>
+                            roleIds.push("{{ role.id }}");
+                            roleSelected.push(false);
+                        </script>
+                    {% endif %}
+                    <script>
+                        $('#{{ role.id }}').click(function() {
+                            ensureAtLeastOne("{{ role.id }}");
+                        });
+                    </script>
+	            {% endfor %}
+            </div>
+        </div>
+        
+        <div class="control-group{% if payload.form.errors.post %} error{% endif %}">
+            <label class="control-label" for="roles">{{ _('Roles (to be hidden):') }}</label>
             <div class="controls">
                 {{ payload.form.roles(maxlength = 120, class = "span4") }}
                 {% for error in payload.form.errors.roles %}
@@ -30,6 +108,7 @@
                 {% endfor %}
             </div>
         </div>
+
         <div class="control-group{% if payload.form.errors.post %} error{% endif %}">
             <label class="control-label" for="email">{{ _('eMail address:') }}</label>
             <div class="controls">
@@ -39,6 +118,7 @@
                 {% endfor %}
             </div>
         </div>
+        
         <div class="control-group{% if payload.form.errors.post %} error{% endif %}">
             <label class="control-label" for="about_me">{{ _('Notes:') }}</label>
             <div class="controls">
@@ -48,6 +128,7 @@
                 {% endfor %}
             </div>
         </div>
+
         <div class="control-group pull-right">
             <div class="controls">
                 <input class="btn btn-primary btn-submit-fontus" type="submit" value="{{ _('Save') }}">
@@ -55,5 +136,19 @@
         </div>
         <hr/>
     </form>
+    
+    <script>
+        /* Collect up selected roles and pass back as a string. */
+        $('#frmUserEdit').submit(function() {
+            var lstRoles = "";
+            var sep = "";
+            $('#frmUserEdit .btn.active').each(function() {
+                lstRoles += sep + this.id;
+                sep = ",";
+            });
+            document.getElementById("roles").value = lstRoles;
+        });
+    </script>
+    
 </div>
 

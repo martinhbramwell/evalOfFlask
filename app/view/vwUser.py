@@ -9,6 +9,9 @@ from app.control.utils import pretty_list
 
 from app.model.mdUser import User
 from app.forms.fmUser import UserForm
+
+from app.model.mdRole import Role
+
 from app.forms.app_forms import DeleteRecordsForm
 
 @flask_application.route('/users')
@@ -74,10 +77,11 @@ def newuser():
     if administrator_permission.can():
 
         user = User()
+        roles = Role.query.all()
         form = UserForm(user)
         if form.validate_on_submit():
             return saveIt(user, form)
-        return renderIt('users.html', {'key': 'new', 'form': form})
+        return renderIt('users.html', {'key': 'new', 'form': form, 'roles': roles})
     else:
         flash(gettext('You are not authorised to create new users. You can request permission in "Your Profile"'), 'error')
         return redirect(url_for('users'))

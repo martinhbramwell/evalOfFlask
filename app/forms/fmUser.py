@@ -1,4 +1,4 @@
-from flask.ext.wtf import Form, TextField, BooleanField, TextAreaField
+from flask.ext.wtf import Form, TextField, BooleanField, HiddenField, TextAreaField
 from flask.ext.wtf import Required, Length
 from flask.ext.babel import gettext
 
@@ -8,7 +8,8 @@ class UserForm(Form):
     nickname = TextField('nickname', validators = [Required()])
     about_me = TextAreaField('about_me', validators = [Length(min = 0, max = 140)])
     email = TextField('email', validators = [Required(), Length(min = 0, max = 120)])
-    roles = TextField('roles', validators = [Required(), Length(min = 5, max = 10)])
+    roles = TextField('roles', validators = [Required()]) # FIXME:
+#    roles = HiddenField('roles', validators = [Required()])
     
     def __init__(self, original_nickname, *args, **kwargs):
         Form.__init__(self, *args, **kwargs)
