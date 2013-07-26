@@ -4,12 +4,12 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="http://fontus/" />
-<title>Test Case: Create User</title>
+<title>Test Case: Edit User</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">Test Case: Create User</td></tr>
+<tr><td rowspan="1" colspan="3">Test Case: Edit User</td></tr>
 </thead><tbody>
 <tr>
 	<td>assertTextPresent</td>
@@ -23,43 +23,28 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=New</td>
+	<td>id=record2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Last seen: </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=h1</td>
+	<td>Alicia</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=btnADMIN2</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=nickname</td>
-	<td>Baby</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=ADMIN</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=COMPT</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=ANON</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=roles</td>
-	<td>ADMIN</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=email</td>
-	<td>martinhbramwell@yahoo.com</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=about_me</td>
-	<td>just for fun</td>
+	<td>id=name</td>
+	<td>Administration</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -67,34 +52,24 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>assertText</td>
 	<td>css=div.alert.alert-success</td>
+	<td>× Your changes have been saved.</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=btnCOMPTWarehouseman</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>Your new user: Baby (</td>
-	<td></td>
+	<td>assertText</td>
+	<td>css=p</td>
+	<td>comptroller</td>
 </tr>
 <tr>
-	<td>storeText</td>
-	<td>css=div.alert.alert-success</td>
-	<td>succMess</td>
-</tr>
-<tr>
-	<td>store</td>
-	<td>javascript{storedVars['succMess'].split('(')[1].split(')')[0]}</td>
-	<td>newId</td>
-</tr>
-<tr>
-	<td>echo</td>
-	<td>${newId}</td>
-	<td></td>
-</tr>
-<tr>
-	<td>echo</td>
-	<td>* * * * * * * * * * * * * </td>
-	<td></td>
+	<td>assertText</td>
+	<td>css=h1</td>
+	<td>Warehouseman</td>
 </tr>
 </tbody></table>
 </body>

@@ -4,12 +4,12 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="http://fontus/" />
-<title>Test Case: Delete User</title>
+<title>Test Case: Edit Role</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">Test Case: Delete User</td></tr>
+<tr><td rowspan="1" colspan="3">Test Case: Edit Role</td></tr>
 </thead><tbody>
 <tr>
 	<td>assertTextPresent</td>
@@ -19,51 +19,6 @@
 <tr>
 	<td>open</td>
 	<td>/users</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=New</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=nickname</td>
-	<td>Baby</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=roles</td>
-	<td>ADMIN</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=email</td>
-	<td>martinhbramwell@yahoo.com</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=about_me</td>
-	<td>just for fun</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>xpath=(//input[@value='Save'])[2]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=div.alert.alert-success</td>
-	<td>× Your changes have been saved.</td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/users</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>id=record2</td>
 	<td></td>
 </tr>
 <tr>
