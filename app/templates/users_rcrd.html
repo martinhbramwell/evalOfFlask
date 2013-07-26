@@ -7,7 +7,7 @@
             </script>
     </td>
     <td>
-        <a href="{{ url_for('users', official_id = record.official_id) }}">
+        <a href="{{ url_for('user', nickname = record.nickname) }}">
             <strong><span id="record{{record.id}}">{{record.nickname}}</span></strong>
         </a>
         <br/>

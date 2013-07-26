@@ -48,8 +48,17 @@
             location.assign("/deluser?id=" + ids.substring(2).replace(/\s+/g, ''));
             return false;
         }
-    
+            
         $('#deleteLink').click(function(){ funcDelete(); return false; });
+
+/*        FIXME: erase
+        function funcRole() {
+            alert("ok!");
+            return false;
+        }
+    
+        $('#chkbRole').click(function(){ funcRole(); return false; });
+*/
         
     </script>
 
