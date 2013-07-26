@@ -80,19 +80,6 @@ def index(page = 1):
         form = form,
         posts = posts)
         
-@flask_application.route('/user/<nickname>')
-@login_required
-def user(nickname, page = 1):
-    user = User.query.filter_by(nickname = nickname).first()
-    if user == None:
-        flash(gettext('User %(nickname)s not found.', nickname = nickname))
-        return redirect(url_for('index'))
-    posts = user.posts.paginate(page, POSTS_PER_PAGE, False)
-    return render_template('user.html',
-        user = user,
-        posts = posts)
-
-        
 @flask_application.route('/follow/<nickname>')
 @login_required
 def follow(nickname):

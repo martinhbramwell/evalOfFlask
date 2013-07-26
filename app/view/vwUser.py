@@ -14,6 +14,21 @@ from app.model.mdRole import Role
 
 from app.forms.app_forms import DeleteRecordsForm
 
+from config import POSTS_PER_PAGE
+# , MAX_SEARCH_RESULTS, LANGUAGES, DATABASE_QUERY_TIMEOUT, WHOOSH_ENABLED
+
+@flask_application.route('/user/<nickname>')
+@login_required
+def user(nickname, page = 1):
+    user = User.query.filter_by(nickname = nickname).first()
+    if user == None:
+        flash(gettext('User %(nickname)s not found.', nickname = nickname))
+        return redirect(url_for('index'))
+    posts = user.posts.paginate(page, POSTS_PER_PAGE, False)
+    return render_template('user.html',
+        user = user,
+        posts = posts)
+
 @flask_application.route('/users')
 @flask_application.route('/users/<int:page>')
 @login_required
@@ -80,6 +95,7 @@ def newuser():
         roles = Role.query.all()
         form = UserForm(user)
         if form.validate_on_submit():
+            print 'Roles gained : {}.'.format(form.roles.data)
             return saveIt(user, form)
         return renderIt('users.html', {'key': 'new', 'form': form, 'roles': roles})
     else:
