@@ -34,7 +34,7 @@
                 return -1;
             }
             
-            function howMany (current) {
+            function howMany () {
                 var cnt = 0;
                 for (var ii = 0 ; ii < roleIds.length ; ii++) {
                     if (roleSelected[ii]) {
@@ -71,26 +71,19 @@
         </script>
         
         <div class="control-group{% if payload.form.errors.post %} error{% endif %}">
-            <label class="control-label" for="roles">{{ _('Roles:') }}</label>
+            <label class="control-label" for="rolesXX">{{ _('Roles:') }}</label>
             <div class="controls" data-toggle="buttons-checkbox">
-	            {% for role in payload.roles %}	                 
-                    {% if role.id == 'ANON' %}
-                        <button name="btnRole" id="{{ role.id }}" class="btn btn-mini active" type="button">
-                            {{ role.name }}
-                        </button>
-                        <script>
-                            slctANON = true;
-                        </script>
-                    {% else %}
-                        <button name="btnRole" id="{{ role.id }}" class="btn btn-mini" type="button">
-                            {{ role.name }}
-                        </button>
-                        <script>
-                            roleIds.push("{{ role.id }}");
-                            roleSelected.push(false);
-                        </script>
-                    {% endif %}
+	            {% for role in payload.roles %}
+                    <button name="btnRole" id="{{ role.id }}" class="btn btn-mini {{ role.active }}" type="button">
+                        {{ role.name }}
+                    </button>
                     <script>
+                        {% if role.id == 'ANON' %}
+                            slctANON = "active" == "{{ role.active }}";
+                        {% else %}
+                            roleIds.push("{{ role.id }}");
+                            roleSelected.push("active" == "{{ role.active }}");
+                        {% endif %}
                         $('#{{ role.id }}').click(function() {
                             ensureAtLeastOne("{{ role.id }}");
                         });
@@ -100,7 +93,7 @@
         </div>
         
         <div class="control-group{% if payload.form.errors.post %} error{% endif %}">
-            <label class="control-label" for="roles">{{ _('Roles (to be hidden):') }}</label>
+            <label class="control-label" for="hidden_roles">{{ _('Roles (to be hidden):') }}</label>
             <div class="controls">
                 {{ payload.form.roles(maxlength = 120, class = "span4") }}
                 {% for error in payload.form.errors.roles %}
@@ -139,6 +132,7 @@
     
     <script>
         /* Collect up selected roles and pass back as a string. */
+        
         $('#frmUserEdit').submit(function() {
             var lstRoles = "";
             var sep = "";
@@ -147,8 +141,12 @@
                 sep = ",";
             });
             document.getElementById("roles").value = lstRoles;
+            {% if payload.key != 'new' %}
+                document.getElementById("nickname").value = '{{ payload.form.nickname.data }}';
+            {% endif %}
+            
         });
     </script>
     
 </div>
-
+  

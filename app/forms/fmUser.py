@@ -2,21 +2,24 @@ from flask.ext.wtf import Form, TextField, BooleanField, HiddenField, TextAreaFi
 from flask.ext.wtf import Required, Length
 from flask.ext.babel import gettext
 
+# from app.control.utils import pretty_list
+
 from app.model.mdUser import User
 
 class UserForm(Form):
-    nickname = TextField('nickname', validators = [Required()])
+    nickname = TextField('nickname')
     about_me = TextAreaField('about_me', validators = [Length(min = 0, max = 140)])
     email = TextField('email', validators = [Required(), Length(min = 0, max = 120)])
     roles = TextField('roles', validators = [Required()]) # FIXME:
 #    roles = HiddenField('roles', validators = [Required()])
     
-    def __init__(self, original_nickname, *args, **kwargs):
+    def __init__(self, user, *args, **kwargs):
         Form.__init__(self, *args, **kwargs)
-        self.original_nickname = original_nickname
+        self.original_nickname = user.nickname
         
     def validate(self):
         if not Form.validate(self):
+            print 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
             return False
         if self.nickname.data == self.original_nickname:
             return True
@@ -28,5 +31,8 @@ class UserForm(Form):
             self.nickname.errors.append(gettext('This nickname is already in use. Please choose another one.'))
             return False
         return True
+
+class NewUserForm(UserForm):
+    nickname = TextField('nickname', validators = [Required()])
 
 

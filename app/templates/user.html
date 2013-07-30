@@ -13,7 +13,7 @@
     <p><em>{{ _('Last seen:') }} {{ momentjs(user.last_seen).calendar() }}</em></p>
     {% endif %}
     
-        <a href="{{url_for('edit')}}">{{ _('Edit this user.') }}</a>
+        <a href="{{url_for('edit', nickname = user.nickname)}}">{{ _('Edit this user.') }}</a>
         
     </p>
     <hr/>

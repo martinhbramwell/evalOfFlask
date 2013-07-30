@@ -119,23 +119,6 @@ def unfollow(nickname):
     flash(gettext('You have stopped following %(nickname)s.', nickname = nickname))
     return redirect(url_for('user', nickname = nickname))
 
-@flask_application.route('/edit', methods = ['GET', 'POST'])
-@login_required
-def edit():
-    form = EditForm(g.user.nickname)
-    if form.validate_on_submit():
-        g.user.nickname = form.nickname.data
-        g.user.about_me = form.about_me.data
-        orm_db.session.add(g.user)
-        orm_db.session.commit()
-        flash(gettext('Your changes have been saved.'), 'success')
-        return redirect(url_for('edit'))
-    elif request.method != "POST":
-        form.nickname.data = g.user.nickname
-        form.about_me.data = g.user.about_me
-    return render_template('edit.html',
-        form = form)
-
 @flask_application.route('/delete/<int:id>')
 @login_required
 def delete(id):
