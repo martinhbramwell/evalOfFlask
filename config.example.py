@@ -28,12 +28,19 @@ WHOOSH_ENABLED = os.environ.get('HEROKU') is None
 DATABASE_QUERY_TIMEOUT = 0.5
 
 # email server
-MAIL_SERVER = '' # your mailserver
-MAIL_PORT = 25
-MAIL_USE_TLS = False
-MAIL_USE_SSL = False
-MAIL_USERNAME = 'you'
-MAIL_PASSWORD = 'your-password'
+MAIL_SERVER         = 'smtp.gmail.com'
+MAIL_PORT           = 465
+MAIL_USE_SSL        = True
+MAIL_USE_TLS        = False
+###  MAKE A COPY OF THIS FILE CALLED config.py
+###  ENSURE IT IS REFERRED TO IN .gitignore
+###  PROVIDE SENSIBLE VALUES FOR THE INDICATED KEY WORDS.
+MAIL_USERNAME       = 'your.address@gmail.com'
+MAIL_PASSWORD       = 'your gmail password'
+DEFAULT_MAIL_SENDER = 'your.address@gmail.com'
+
+# administrator list
+# ADMINS = ['you@example.com']
 
 # available languages
 LANGUAGES = {
@@ -45,9 +52,7 @@ LANGUAGES = {
 MS_TRANSLATOR_CLIENT_ID = '' # enter your MS translator app id here
 MS_TRANSLATOR_CLIENT_SECRET = '' # enter your MS translator app secret here
 
-# administrator list
-ADMINS = ['you@example.com']
-
 # pagination
 POSTS_PER_PAGE = 50
 MAX_SEARCH_RESULTS = 50
+
