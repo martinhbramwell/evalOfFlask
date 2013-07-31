@@ -1,7 +1,7 @@
 from app import flask_application, orm_db
 from flask.ext.login import login_required, current_user
 from flask.ext.babel import gettext
-from flask import render_template, flash, request, redirect, url_for
+from flask import render_template, flash, request, redirect, url_for, g
 
 from app import administrator_permission
 # from flask import Response
@@ -29,22 +29,29 @@ def newrole():
             return saveIt(role, form)
         return renderIt({'key': 'new', 'form': form})
     else:
-        flash(gettext('You are not authorised to create new roles. You can request permission in "Your Profile"'), 'error')
+        flash(gettext('You are not authorised to create new roles. You can request permission below.'), 'error')
         return redirect(url_for('roles'))
 
 @flask_application.route('/role/<role_id>', methods = ['GET', 'POST'])
 @login_required
 def role(role_id = None):
     print 'role/id with ' + str(role_id)
-    role = Role.query.filter_by(id = role_id).first()
-    form = RoleForm(role)
-    if form.validate_on_submit():
-        print "Saving {} with key {}.".format(form.name.data, form.role_id.data)
-        return saveIt(role, form)
-    elif request.method != "POST":
-        form.name.data = role.name
-        form.role_id.data = role.id
-    return renderIt({'key': role_id, 'form': form})
+    if administrator_permission.can():
+
+        role = Role.query.filter_by(id = role_id).first()
+        form = RoleForm(role)
+        if form.validate_on_submit():
+            print "Saving {} with key {}.".format(form.name.data, form.role_id.data)
+            return saveIt(role, form)
+        elif request.method != "POST":
+            form.name.data = role.name
+            form.role_id.data = role.id
+        return renderIt({'key': role_id, 'form': form})
+        
+    else:
+        flash(gettext('You are not authorised to edit roles. You can request permission below.'), 'error')
+        return redirect(url_for('edit', nickname = g.user.nickname))
+
 
 def saveIt(role, form):
         role.name = form.name.data
