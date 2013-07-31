@@ -17,4 +17,9 @@ def pretty_list(plain_list, conjunction = ' & '):
         return pretty_list_string
     return
     
+def ampersandAtEnd(msg):
+    k = msg.rfind(",")
+    if k > 0:
+        return msg[:k] + " & " + msg[k+1:]
+    return msg
 
