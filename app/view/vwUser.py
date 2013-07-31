@@ -1,11 +1,14 @@
-from app import flask_application, orm_db
 from flask.ext.login import login_required, current_user
 from flask.ext.babel import gettext
-from flask import render_template, flash, request, redirect, url_for
+from flask import render_template, flash, request, redirect, url_for, g
 
+from flask.ext.mail import Message
+# from flask.ext.mail import Mail
+
+from app import flask_application, orm_db, mail
 from app import administrator_permission
 
-from app.control.utils import pretty_list
+from app.control.utils import pretty_list, ampersandAtEnd
 
 from app.model.mdUser import User
 from app.forms.fmUser import UserForm
@@ -16,7 +19,8 @@ from app.model.mdMany2Many import user_roles
 
 from app.forms.app_forms import DeleteRecordsForm
 
-from config import POSTS_PER_PAGE
+import config 
+# POSTS_PER_PAGE, DEFAULT_MAIL_SENDER
 # , MAX_SEARCH_RESULTS, LANGUAGES, DATABASE_QUERY_TIMEOUT, WHOOSH_ENABLED
 
 @flask_application.route('/edit/<nickname>', methods = ['GET', 'POST'])
@@ -29,7 +33,7 @@ def edit(nickname):
         flash(gettext('User %(nickname)s not found.', nickname = nickname))
         return redirect(url_for('index'))
 
-    if administrator_permission.can():
+    if administrator_permission.can() or g.user.nickname == nickname:
     
         roleVOs = determineRoles(user)
         form = UserForm(user)
@@ -48,7 +52,7 @@ def edit(nickname):
         return renderIt('users.html', {'key': 'edit', 'form': form, 'roles': roleVOs, 'user': user})
         
     else:
-        flash(gettext('You are not authorised to create new users. You can request permission in "Your Profile"'), 'error')
+        flash(gettext('You are not authorised to edit users. You can request permission below.'), 'error')
         return redirect(url_for('users'))
         
     return redirect(url_for('users'))
@@ -82,7 +86,7 @@ def user(nickname, page = 1):
     if user == None:
         flash(gettext('User %(nickname)s not found.', nickname = nickname))
         return redirect(url_for('index'))
-    posts = user.posts.paginate(page, POSTS_PER_PAGE, False)
+    posts = user.posts.paginate(page, config.POSTS_PER_PAGE, False)
     print 'Posts : {}'.format(posts)
     return render_template('user.html',
         user = user,
@@ -163,7 +167,7 @@ def renderIt(end_point, pyld):
 
 def renderThem(end_point, pyld):
     pyld['page'] = 'User'
-    pyld['records'] = User.query.all() # .paginate(page, POSTS_PER_PAGE, False)
+    pyld['records'] = User.query.all() # .paginate(page, config.POSTS_PER_PAGE, False)
 
     return render_template(end_point, payload = pyld)
     
@@ -173,17 +177,31 @@ def saveIt(user, form, op_type='new'):
         user.email = form.email.data
         
 #        print 'Will save: {}\n - Notes: {}\n - Email: {}\n - Roles: {}'.format(user.nickname, user.about_me, user.email, form.roles.data)
-        user.roles = []
-        for aRole in form.roles.data.split(','):
-            user.roles.append(Role.query.get(aRole))
+
+        if administrator_permission.can():
+            user.roles = []
+            for aRole in form.roles.data.split(','):
+                user.roles.append(Role.query.get(aRole))
+        else:
+            msg = Message (
+                  'Fontus privileges request.'
+                , sender=config.DEFAULT_MAIL_SENDER
+                , recipients=[g.user.email, config.DEFAULT_MAIL_SENDER]
+            )
+                        
+            msg.body = "{} requests to be allocated {} privileges".format(g.user.nickname, ampersandAtEnd(form.roles.data))
+            mail.send(msg)
             
+            alert = 'An email has been sent to the site administrators, stating : "{}".'.format(msg.body)
+            flash(gettext(alert), 'info')
+
         if op_type == 'new':
             user.nickname = form.nickname.data
             orm_db.session.add(user)
             
         orm_db.session.commit()
         
-        flash(gettext('Your {} user: {} ({}), has been saved.'.format(op_type, user.nickname, user.id)), 'success')
+        flash(gettext('Your {} user: {}, has been saved.'.format(op_type, user.nickname)), 'success')
         return redirect(url_for('users'))
 
 
