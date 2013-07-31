@@ -18,7 +18,7 @@ from app.model.mdRole import Role, ROLE_ANONYMOUS, ROLE_ADMINISTRATOR
 from app.model.post import Post
 
 from datetime import datetime
-from app.control.emails import follower_notification
+# from app.control.emails import follower_notification
 from guess_language import guessLanguage
 from app.control.translate import microsoft_translate
 

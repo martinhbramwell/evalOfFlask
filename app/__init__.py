@@ -7,11 +7,13 @@ from flask.ext.login import LoginManager
 from flask.ext.openid import OpenID
 from flask.ext.mail import Mail 
 from flask.ext.babel import Babel, lazy_gettext
-from config import basedir, ADMINS, MAIL_SERVER, MAIL_PORT, MAIL_USERNAME, MAIL_PASSWORD
+from config import basedir
+from config import DEFAULT_MAIL_SENDER, MAIL_SERVER, MAIL_PORT, MAIL_USERNAME, MAIL_PASSWORD
 from momentjs import momentjs
 
 flask_application = Flask(__name__)
 flask_application.config.from_object('config')
+
 orm_db = SQLAlchemy(flask_application)
 
 resp = Response
@@ -44,7 +46,7 @@ if not flask_application.debug and MAIL_SERVER != '':
     credentials = None
     if MAIL_USERNAME or MAIL_PASSWORD:
         credentials = (MAIL_USERNAME, MAIL_PASSWORD)
-    mail_handler = SMTPHandler((MAIL_SERVER, MAIL_PORT), 'no-reply@' + MAIL_SERVER, ADMINS, 'microblog failure', credentials)
+    mail_handler = SMTPHandler((MAIL_SERVER, MAIL_PORT), 'no-reply@' + MAIL_SERVER, [DEFAULT_MAIL_SENDER], 'microblog failure', credentials)
     mail_handler.setLevel(logging.ERROR)
     flask_application.logger.addHandler(mail_handler)
 
