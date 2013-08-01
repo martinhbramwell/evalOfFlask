@@ -9,7 +9,7 @@ from flask import current_app
 
 
 from app import flask_application, orm_db, login_manager, openID_service, babel
-from app.forms.demo_forms import EditForm
+# from app.forms.demo_forms import EditForm
 from app.forms.app_forms import LoginForm, PostForm, SearchForm
 
 
