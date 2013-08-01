@@ -202,6 +202,7 @@ def saveIt(user, form, op_type='new'):
         orm_db.session.commit()
         
         flash(gettext('Your {} user: {}, has been saved.'.format(op_type, user.nickname)), 'success')
+        flash(gettext('({}).'.format(user.id)), 'info')
         return redirect(url_for('users'))
 
 
