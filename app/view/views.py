@@ -61,6 +61,7 @@ def internal_error(error):
 @flask_application.route('/index/<int:page>', methods = ['GET', 'POST'])
 @login_required
 def index(page = 1):
+    print 'Home: {}'.format(flask_application.config['MINE'])
     form = PostForm()
     if form.validate_on_submit():
         language = guessLanguage(form.post.data)

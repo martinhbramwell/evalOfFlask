@@ -7,9 +7,9 @@ from install import dbUtil
 
 def main():
 
-    fontus = "A stripper well management tool based on Miguel Grinberg's Flask tutorial."
+    warehouseman = "A generic 'blank' website structure based on Miguel Grinberg's Flask 'mega'-tutorial."
     usage = "usage: %prog [options] arg"
-    parser = argparse.ArgumentParser(description=fontus)
+    parser = argparse.ArgumentParser(description=warehouseman)
     parser.add_argument("-s", "--server", dest="nameHost", default="localhost",
                       help="host domain name or IP if you do not want 'localhost'")
     parser.add_argument("-p", "--port", dest="numPort", default=80,
@@ -43,6 +43,7 @@ def main():
         print "Will use Host -- {} and port -- {}.".format(args.nameHost, args.numPort)
 
 
+    flask_application.config['MINE'] = 'XXXX'
     flask_application.run(args.nameHost, int(args.numPort), debug = args.debug)
 
 
@@ -53,5 +54,5 @@ if __name__ == "__main__":
 # Example :    ./run.py -vdg -s www.matrixoflife.net -p 8088 &
 
 # find . -name "*.py~" -print0 | xargs -0 rm -rf  && find . -name "*.pyc" -print0 | xargs -0 rm -rf
-# grep -R --exclude=\*.*~ --exclude=\*.pyc --exclude-dir={flask,tmp} "url_for" .  2>/dev/null
+# grep -R --exclude=\*.*~ --exclude=\*.pyc --exclude-dir={flask,tmp,.git} "url_for" .  2>/dev/null
 

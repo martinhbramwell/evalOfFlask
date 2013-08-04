@@ -166,6 +166,7 @@ def renderIt(end_point, pyld):
     return renderThem(end_point, pyld)
 
 def renderThem(end_point, pyld):
+    pyld['project'] = config.PROJECT_NAME
     pyld['page'] = 'User'
     pyld['records'] = User.query.all() # .paginate(page, config.POSTS_PER_PAGE, False)
 
@@ -184,7 +185,7 @@ def saveIt(user, form, op_type='new'):
                 user.roles.append(Role.query.get(aRole))
         else:
             msg = Message (
-                  'Fontus privileges request.'
+                  '{} privileges request.'.format(config.PROJECT_NAME)
                 , sender=config.DEFAULT_MAIL_SENDER
                 , recipients=[g.user.email, config.DEFAULT_MAIL_SENDER]
             )

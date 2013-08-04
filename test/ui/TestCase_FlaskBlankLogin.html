@@ -3,13 +3,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://fontus/" />
-<title>TestCase</title>
+<title>Test Case: User Login</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">TestCase</td></tr>
+<tr><td rowspan="1" colspan="3">Test Case: User Login</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -17,8 +16,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>loadJsonVars</td>
+	<td>initialParms.json</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>${projectname}</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertTitle</td>
-	<td>Sign In - Fontus</td>
+	<td>${projectname} - Sign In</td>
 	<td></td>
 </tr>
 <tr>
@@ -38,12 +47,12 @@
 </tr>
 <tr>
 	<td>waitForTitle</td>
-	<td>Home - Fontus</td>
+	<td>${projectname} - Home</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Home - Fontus</td>
+	<td>${projectname} - Home</td>
 	<td></td>
 </tr>
 <tr>
