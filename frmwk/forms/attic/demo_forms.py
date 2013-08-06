@@ -2,7 +2,7 @@ from flask.ext.wtf import Form, TextField, BooleanField, TextAreaField
 from flask.ext.wtf import Required, Length
 from flask.ext.babel import gettext
 
-from app.model.mdUser import User
+from frmwk.model.mdUser import User
 
 class EditForm(Form):
     nickname = TextField('nickname', validators = [Required()])
