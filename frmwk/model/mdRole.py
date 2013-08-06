@@ -1,6 +1,6 @@
-from app import orm_db
+from frmwk import orm_db
 
-from app.model.mdMany2Many import user_roles
+from frmwk.model.mdMany2Many import user_roles
 
 ROLE_ANONYMOUS = 'ANON'
 ROLE_ADMINISTRATOR = 'ADMIN'

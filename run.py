@@ -2,7 +2,7 @@
 import argparse
 import os.path
 
-from app import flask_application
+from frmwk import flask_application
 from install import dbUtil
 
 def main():

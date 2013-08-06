@@ -7,14 +7,14 @@ from flask.ext.principal import identity_changed, identity_loaded
 from flask.ext.principal import Identity, AnonymousIdentity
 from flask.ext.principal import UserNeed, RoleNeed
 
-from app import flask_application, login_manager
-from app import openID_service
-from app import orm_db
+from frmwk import flask_application, login_manager
+from frmwk import openID_service
+from frmwk import orm_db
 
-from app.forms.app_forms import LoginForm#, PostForm, SearchForm
+from frmwk.forms.app_forms import LoginForm#, PostForm, SearchForm
 
-from app.model.mdUser import User
-from app.model.mdRole import Role
+from frmwk.model.mdUser import User
+from frmwk.model.mdRole import Role
 
 # login stuff ----------------------
 

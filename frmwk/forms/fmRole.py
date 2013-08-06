@@ -2,7 +2,7 @@ from flask.ext.wtf import Form, TextField, BooleanField, TextAreaField
 from flask.ext.wtf import Required, Length
 from flask.ext.babel import gettext
 
-from app.model.mdRole import Role
+from frmwk.model.mdRole import Role
 
 class RoleForm(Form):
     name = TextField('name', validators = [Required()])

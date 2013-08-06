@@ -1,4 +1,4 @@
-from app import orm_db
+from frmwk import orm_db
 
 user_roles = orm_db.Table('user_roles',
       orm_db.Column('role_id', orm_db.String(16), orm_db.ForeignKey('role.id'))

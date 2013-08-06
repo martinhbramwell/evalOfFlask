@@ -2,9 +2,9 @@ from flask.ext.wtf import Form, TextField, BooleanField, HiddenField, TextAreaFi
 from flask.ext.wtf import Required, Length
 from flask.ext.babel import gettext
 
-# from app.control.utils import pretty_list
+# from frmwk.control.utils import pretty_list
 
-from app.model.mdUser import User
+from frmwk.model.mdUser import User
 
 class UserForm(Form):
     nickname = TextField('nickname')

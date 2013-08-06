@@ -1,13 +1,13 @@
-from app import flask_application, orm_db
+from frmwk import flask_application, orm_db
 from flask.ext.login import login_required, current_user
 from flask.ext.babel import gettext
 from flask import render_template, flash, request, redirect, url_for, g
 
-from app import administrator_permission
+from frmwk import administrator_permission
 # from flask import Response
 
-from app.model.mdRole import Role
-from app.forms.fmRole import RoleForm
+from frmwk.model.mdRole import Role
+from frmwk.forms.fmRole import RoleForm
 
 @flask_application.route('/roles')
 @flask_application.route('/roles/<int:page>')

@@ -1,5 +1,5 @@
-from app import flask_application, orm_db
-# from app import db, lm, oid, babel
+from frmwk import flask_application, orm_db
+# from frmwk import db, lm, oid, babel
 
 from flask.ext.login import login_required, current_user
 # from flask.ext.login import login_user, logout_user
@@ -9,11 +9,11 @@ from flask.ext.babel import gettext
 from flask import render_template, flash, request, redirect, url_for
 # from flask import flash, session, g, jsonify
 
-from app import comptroller_permission
+from frmwk import comptroller_permission
 # from flask import Response
 
-from app.model.mdLease import Lease
-from app.forms.fmLease import LeaseForm
+from frmwk.model.mdLease import Lease
+from frmwk.forms.fmLease import LeaseForm
 
 @flask_application.route('/leases')
 @flask_application.route('/leases/<int:page>')

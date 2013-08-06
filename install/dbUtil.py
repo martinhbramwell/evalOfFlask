@@ -1,7 +1,7 @@
 from migrate.versioning import api
 from config import SQLALCHEMY_DATABASE_URI
 from config import SQLALCHEMY_MIGRATE_REPO
-from app import orm_db
+from frmwk import orm_db
 import os.path
 import shutil
 

@@ -1,6 +1,6 @@
 import urllib, httplib
 import json
-from app import flask_application
+from frmwk import flask_application
 from flask.ext.babel import gettext
 from config import MS_TRANSLATOR_CLIENT_ID, MS_TRANSLATOR_CLIENT_SECRET
 

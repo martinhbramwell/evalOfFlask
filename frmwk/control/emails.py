@@ -1,6 +1,6 @@
 from flask import render_template
 from flask.ext.mail import Message
-from app import mail
+from frmwk import mail
 from decorators import async
 # from config import ADMINS
 

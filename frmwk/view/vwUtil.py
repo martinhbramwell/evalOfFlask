@@ -1,28 +1,13 @@
-from flask import render_template, flash, redirect, session, url_for, request, g, jsonify
-from flask.ext.login import login_user, logout_user, current_user, login_required
+from flask.ext.login import login_required, current_user
+from flask import g, render_template, request
 from flask.ext.sqlalchemy import get_debug_queries
-from flask.ext.babel import gettext
 
-from flask.ext.principal import identity_changed, Identity, AnonymousIdentity
-from flask.ext.principal import identity_loaded, RoleNeed, UserNeed
-from flask import current_app
-
-
-from app import flask_application, orm_db, login_manager, openID_service, babel
-from app.forms.demo_forms import EditForm
-from app.forms.app_forms import LoginForm, PostForm, SearchForm
-
-
-from app.model.mdUser import User
-from app.model.mdRole import Role, ROLE_ANONYMOUS, ROLE_ADMINISTRATOR
-from app.model.post import Post
+from frmwk import flask_application, babel, orm_db
+from frmwk.forms.app_forms import SearchForm, PostForm
+from config import POSTS_PER_PAGE, LANGUAGES, WHOOSH_ENABLED, DATABASE_QUERY_TIMEOUT
 
 from datetime import datetime
-from app.control.emails import follower_notification
-from guess_language import guessLanguage
-from app.control.translate import microsoft_translate
 
-from config import POSTS_PER_PAGE, MAX_SEARCH_RESULTS, LANGUAGES, DATABASE_QUERY_TIMEOUT, WHOOSH_ENABLED
 
 
 @flask_application.route('/edit', methods = ['GET', 'POST'])

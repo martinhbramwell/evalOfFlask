@@ -1,11 +1,11 @@
 from hashlib import md5
-from app import orm_db
-from app import flask_application
+from frmwk import orm_db
+from frmwk import flask_application
 import re
 
-from app.model.post import Post
-from app.model.mdRole import Role
-from app.model.mdMany2Many import user_roles, followers
+from frmwk.model.post import Post
+from frmwk.model.mdRole import Role
+from frmwk.model.mdMany2Many import user_roles, followers
 
 class User(orm_db.Model):
     __tablename__ = 'authenticateduser'

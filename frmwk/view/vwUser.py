@@ -5,19 +5,19 @@ from flask import render_template, flash, request, redirect, url_for, g
 from flask.ext.mail import Message
 # from flask.ext.mail import Mail
 
-from app import flask_application, orm_db, mail
-from app import administrator_permission
+from frmwk import flask_application, orm_db, mail
+from frmwk import administrator_permission
 
-from app.control.utils import pretty_list, ampersandAtEnd
+from frmwk.control.utils import pretty_list, ampersandAtEnd
 
-from app.model.mdUser import User
-from app.forms.fmUser import UserForm
-from app.forms.fmUser import NewUserForm
+from frmwk.model.mdUser import User
+from frmwk.forms.fmUser import UserForm
+from frmwk.forms.fmUser import NewUserForm
 
-from app.model.mdRole import Role
-from app.model.mdMany2Many import user_roles
+from frmwk.model.mdRole import Role
+from frmwk.model.mdMany2Many import user_roles
 
-from app.forms.app_forms import DeleteRecordsForm
+from frmwk.forms.app_forms import DeleteRecordsForm
 
 import config 
 # POSTS_PER_PAGE, DEFAULT_MAIL_SENDER

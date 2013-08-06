@@ -1,5 +1,5 @@
-from app import flask_application
-# from app import db, lm, oid, babel
+from frmwk import flask_application
+# from frmwk import db, lm, oid, babel
 
 from flask.ext.login import login_required, current_user
 # from flask.ext.login import login_user, logout_user
@@ -7,7 +7,7 @@ from flask.ext.login import login_required, current_user
 from flask import render_template
 # from flask import flash, redirect, session, url_for, request, g, jsonify
 
-from app.model.mdLease import Lease
+from frmwk.model.mdLease import Lease
 
 @flask_application.route('/stake')
 @flask_application.route('/stake/<nickname>')

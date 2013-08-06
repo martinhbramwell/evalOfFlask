@@ -2,7 +2,7 @@ from flask.ext.wtf import Form, TextField, BooleanField, TextAreaField
 from flask.ext.wtf import Required, Length
 from flask.ext.babel import gettext
 
-import app.model.mdLease
+import frmwk.model.mdLease
 
 class LeaseForm(Form):
     official_id = TextField('Public Record #', validators = [Required()])

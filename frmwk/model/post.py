@@ -1,5 +1,5 @@
-from app import orm_db
-from app import flask_application
+from frmwk import orm_db
+from frmwk import flask_application
 from config import WHOOSH_ENABLED
 
 class Post(orm_db.Model):
