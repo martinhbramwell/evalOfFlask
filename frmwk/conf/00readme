@@ -1,0 +1,7 @@
+I'm not sure what these files are supposed to do.
+
+EXCEPT : config.example.py
+
+They were all in the top-level directory.  Moving them down here doesn't seem to
+do any damage, so perhaps they can be deleted.
+

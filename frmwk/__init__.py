@@ -7,8 +7,10 @@ from flask.ext.login import LoginManager
 from flask.ext.openid import OpenID
 from flask.ext.mail import Mail 
 from flask.ext.babel import Babel, lazy_gettext
+
 from config import basedir
 from config import DEFAULT_MAIL_SENDER, MAIL_SERVER, MAIL_PORT, MAIL_USERNAME, MAIL_PASSWORD
+
 from momentjs import momentjs
 
 flask_application = Flask(__name__)
