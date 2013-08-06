@@ -8,6 +8,7 @@ flask
 db_repository
 build
 *.*~
+*~
 bootstrap-responsive.css
 bootstrap.css
 test/tmp
