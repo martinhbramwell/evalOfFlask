@@ -10,9 +10,9 @@ import unittest
 from datetime import datetime, timedelta
 
 from config import basedir
-from app import app, db
-from app.models import User, Post
-from app.translate import microsoft_translate
+from frmwk import app, db
+from frmwk.models import User, Post
+from frmwk.translate import microsoft_translate
 
 class TestCase(unittest.TestCase):
     def setUp(self):
