@@ -71,7 +71,8 @@ if os.environ.get('HEROKU') is not None:
 
 flask_application.jinja_env.globals['momentjs'] = momentjs
 
-from frmwk.view import vwUtil, overview, vwLogin, vwLease, vwRole, vwUser, vwStake, vwTank, vwWell
-# from frmwk.view import views
+from frmwk.view import overview, vwUtil, vwLogin, vwRole, vwUser
 from frmwk import model
+
+from frmwk.view import vwLease, vwStake, vwTank, vwWell
 
