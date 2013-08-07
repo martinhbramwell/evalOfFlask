@@ -7,7 +7,7 @@ from flask.ext.principal import identity_changed, identity_loaded
 from flask.ext.principal import Identity, AnonymousIdentity
 from flask.ext.principal import UserNeed, RoleNeed
 
-from frmwk import flask_application, login_manager
+from frmwk import flask_framework, login_manager
 from frmwk import openID_service
 from frmwk import orm_db
 
@@ -22,7 +22,7 @@ from frmwk.model.mdRole import Role
 def load_user(id):
     return User.query.get(int(id))
 
-@flask_application.route('/login', methods = ['GET', 'POST'])
+@flask_framework.route('/login', methods = ['GET', 'POST'])
 @openID_service.loginhandler
 def login():
 
@@ -43,7 +43,7 @@ def login():
     return render_template('global/login.html', 
         title = 'Sign In',
         form = form,
-        providers = flask_application.config['OPENID_PROVIDERS'])
+        providers = flask_framework.config['OPENID_PROVIDERS'])
 
 
 @openID_service.after_login
@@ -84,7 +84,7 @@ def after_login(resp):
 
     return redirect(request.args.get('next') or url_for('index'))
 
-@flask_application.route('/logout')
+@flask_framework.route('/logout')
 def logout():
 
     # destroy the user's session
@@ -103,7 +103,7 @@ def logout():
     return redirect(url_for('index'))
     
 
-@identity_loaded.connect_via(flask_application)
+@identity_loaded.connect_via(flask_framework)
 def on_identity_loaded(sender, identity):
     # Set the identity user object
     identity.user = current_user

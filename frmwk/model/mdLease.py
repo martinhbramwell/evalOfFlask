@@ -1,5 +1,5 @@
 from frmwk import orm_db
-# from frmwk import flask_application
+# from frmwk import flask_framework
 
 class Lease(orm_db.Model):
     

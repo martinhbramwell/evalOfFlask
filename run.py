@@ -2,7 +2,7 @@
 import argparse
 import os.path
 
-from frmwk import flask_application
+from frmwk import flask_framework
 from install import dbUtil
 
 def main():
@@ -43,8 +43,8 @@ def main():
         print "Will use Host -- {} and port -- {}.".format(args.nameHost, args.numPort)
 
 
-    flask_application.config['MINE'] = 'XXXX'
-    flask_application.run(args.nameHost, int(args.numPort), debug = args.debug)
+    flask_framework.config['MINE'] = 'XXXX'
+    flask_framework.run(args.nameHost, int(args.numPort), debug = args.debug)
 
 
 if __name__ == "__main__":

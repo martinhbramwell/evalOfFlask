@@ -1,4 +1,4 @@
-from frmwk import flask_application
+from frmwk import flask_framework
 # from frmwk import db, lm, oid, babel
 
 from flask.ext.login import login_required, current_user
@@ -9,9 +9,9 @@ from flask import render_template
 
 from frmwk.model.mdLease import Lease
 
-@flask_application.route('/stake')
-@flask_application.route('/stake/<nickname>')
-@flask_application.route('/stake/<nickname>/<int:page>')
+@flask_framework.route('/stake')
+@flask_framework.route('/stake/<nickname>')
+@flask_framework.route('/stake/<nickname>/<int:page>')
 @login_required
 def stake(page = 1, nickname = 'Ooops!  Bad'):
     aLease = Lease.query.get(2)

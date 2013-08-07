@@ -5,7 +5,7 @@ from flask import render_template, flash, request, redirect, url_for, g
 from flask.ext.mail import Message
 # from flask.ext.mail import Mail
 
-from frmwk import flask_application, orm_db, mail
+from frmwk import flask_framework, orm_db, mail
 from frmwk import administrator_permission
 
 from frmwk.control.utils import pretty_list, ampersandAtEnd
@@ -23,7 +23,7 @@ import config
 # POSTS_PER_PAGE, DEFAULT_MAIL_SENDER
 # , MAX_SEARCH_RESULTS, LANGUAGES, DATABASE_QUERY_TIMEOUT, WHOOSH_ENABLED
 
-@flask_application.route('/edit/<nickname>', methods = ['GET', 'POST'])
+@flask_framework.route('/edit/<nickname>', methods = ['GET', 'POST'])
 @login_required
 def edit(nickname):
     user = User.query.filter_by(nickname = nickname).first()
@@ -57,7 +57,7 @@ def edit(nickname):
         
     return redirect(url_for('users'))
 
-@flask_application.route('/newuser', methods = ['GET', 'POST'])
+@flask_framework.route('/newuser', methods = ['GET', 'POST'])
 @login_required
 def newuser():
 
@@ -76,7 +76,7 @@ def newuser():
 
 
 
-@flask_application.route('/user/<nickname>')
+@flask_framework.route('/user/<nickname>')
 @login_required
 def user(nickname, page = 1):
 
@@ -92,14 +92,14 @@ def user(nickname, page = 1):
         user = user,
         posts = posts)
 
-@flask_application.route('/users')
-@flask_application.route('/users/<int:page>')
+@flask_framework.route('/users')
+@flask_framework.route('/users/<int:page>')
 @login_required
 def users(page = 1):
     print 'users or users with ' + str(page)
     return renderThem('users.html', {'pageNum': page}) 
 
-@flask_application.route('/deluser', methods = ['GET', 'POST'])
+@flask_framework.route('/deluser', methods = ['GET', 'POST'])
 @login_required
 def deluser():
     strIds = request.args.get('id')

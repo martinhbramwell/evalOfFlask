@@ -1,4 +1,4 @@
-from frmwk import flask_application, orm_db
+from frmwk import flask_framework, orm_db
 from flask.ext.login import login_required, current_user
 from flask.ext.babel import gettext
 from flask import render_template, flash, request, redirect, url_for, g
@@ -9,14 +9,14 @@ from frmwk import administrator_permission
 from frmwk.model.mdRole import Role
 from frmwk.forms.fmRole import RoleForm
 
-@flask_application.route('/roles')
-@flask_application.route('/roles/<int:page>')
+@flask_framework.route('/roles')
+@flask_framework.route('/roles/<int:page>')
 @login_required
 def roles(page = 1):
     print 'roles or roles with ' + str(page)
     return renderThem({'pageNum': page}) 
 
-@flask_application.route('/newrole', methods = ['GET', 'POST'])
+@flask_framework.route('/newrole', methods = ['GET', 'POST'])
 @login_required
 def newrole():
     print 'newrole'
@@ -32,7 +32,7 @@ def newrole():
         flash(gettext('You are not authorised to create new roles. You can request permission below.'), 'error')
         return redirect(url_for('roles'))
 
-@flask_application.route('/role/<role_id>', methods = ['GET', 'POST'])
+@flask_framework.route('/role/<role_id>', methods = ['GET', 'POST'])
 @login_required
 def role(role_id = None):
     print 'role/id with ' + str(role_id)

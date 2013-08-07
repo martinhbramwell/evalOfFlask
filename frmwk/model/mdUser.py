@@ -1,6 +1,6 @@
 from hashlib import md5
 from frmwk import orm_db
-from frmwk import flask_application
+from frmwk import flask_framework
 import re
 
 from frmwk.model.post import Post

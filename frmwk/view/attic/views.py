@@ -8,7 +8,7 @@ from flask.ext.principal import identity_loaded, RoleNeed, UserNeed
 from flask import current_app
 
 
-from frmwk import flask_application, orm_db, login_manager, openID_service, babel
+from frmwk import flask_framework, orm_db, login_manager, openID_service, babel
 # from frmwk.forms.demo_forms import EditForm
 from frmwk.forms.app_forms import LoginForm, PostForm, SearchForm
 
@@ -29,7 +29,7 @@ from config import POSTS_PER_PAGE, MAX_SEARCH_RESULTS, LANGUAGES, DATABASE_QUERY
 def get_locale():
     return request.accept_languages.best_match(LANGUAGES.keys())
     
-@flask_application.before_request
+@flask_framework.before_request
 def before_request():
     g.user = current_user
     if g.user.is_authenticated():
@@ -40,28 +40,28 @@ def before_request():
     g.locale = get_locale()
     g.search_enabled = WHOOSH_ENABLED
 
-@flask_application.after_request
+@flask_framework.after_request
 def after_request(response):
     for query in get_debug_queries():
         if query.duration >= DATABASE_QUERY_TIMEOUT:
-            flask_application.logger.warning("SLOW QUERY: %s\nParameters: %s\nDuration: %fs\nContext: %s\n" % (query.statement, query.parameters, query.duration, query.context))
+            flask_framework.logger.warning("SLOW QUERY: %s\nParameters: %s\nDuration: %fs\nContext: %s\n" % (query.statement, query.parameters, query.duration, query.context))
     return response
 
-@flask_application.errorhandler(404)
+@flask_framework.errorhandler(404)
 def internal_error(error):
     return render_template('global/404.html'), 404
 
-@flask_application.errorhandler(500)
+@flask_framework.errorhandler(500)
 def internal_error(error):
     orm_db.session.rollback()
     return render_template('global/500.html'), 500
 
-@flask_application.route('/', methods = ['GET', 'POST'])
-@flask_application.route('/index', methods = ['GET', 'POST'])
-@flask_application.route('/index/<int:page>', methods = ['GET', 'POST'])
+@flask_framework.route('/', methods = ['GET', 'POST'])
+@flask_framework.route('/index', methods = ['GET', 'POST'])
+@flask_framework.route('/index/<int:page>', methods = ['GET', 'POST'])
 @login_required
 def index(page = 1):
-    print 'Home: {}'.format(flask_application.config['MINE'])
+    print 'Home: {}'.format(flask_framework.config['MINE'])
     form = PostForm()
     if form.validate_on_submit():
         language = guessLanguage(form.post.data)
@@ -81,7 +81,7 @@ def index(page = 1):
         form = form,
         posts = posts)
         
-@flask_application.route('/follow/<nickname>')
+@flask_framework.route('/follow/<nickname>')
 @login_required
 def follow(nickname):
     user = User.query.filter_by(nickname = nickname).first()
@@ -101,7 +101,7 @@ def follow(nickname):
     follower_notification(user, g.user)
     return redirect(url_for('user', nickname = nickname))
 
-@flask_application.route('/unfollow/<nickname>')
+@flask_framework.route('/unfollow/<nickname>')
 @login_required
 def unfollow(nickname):
     user = User.query.filter_by(nickname = nickname).first()
@@ -120,7 +120,7 @@ def unfollow(nickname):
     flash(gettext('You have stopped following %(nickname)s.', nickname = nickname))
     return redirect(url_for('user', nickname = nickname))
 
-@flask_application.route('/delete/<int:id>')
+@flask_framework.route('/delete/<int:id>')
 @login_required
 def delete(id):
     post = Post.query.get(id)
@@ -135,14 +135,14 @@ def delete(id):
     flash('Your post has been deleted.')
     return redirect(url_for('index'))
     
-@flask_application.route('/search', methods = ['POST'])
+@flask_framework.route('/search', methods = ['POST'])
 @login_required
 def search():
     if not g.search_form.validate_on_submit():
         return redirect(url_for('index'))
     return redirect(url_for('search_results', query = g.search_form.search.data))
 
-@flask_application.route('/search_results/<query>')
+@flask_framework.route('/search_results/<query>')
 @login_required
 def search_results(query):
     results = Post.query.whoosh_search(query, MAX_SEARCH_RESULTS).all()
@@ -150,7 +150,7 @@ def search_results(query):
         query = query,
         results = results)
 
-@flask_application.route('/translate', methods = ['POST'])
+@flask_framework.route('/translate', methods = ['POST'])
 @login_required
 def translate():
     return jsonify({

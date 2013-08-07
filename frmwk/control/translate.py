@@ -1,6 +1,6 @@
 import urllib, httplib
 import json
-from frmwk import flask_application
+from frmwk import flask_framework
 from flask.ext.babel import gettext
 from config import MS_TRANSLATOR_CLIENT_ID, MS_TRANSLATOR_CLIENT_SECRET
 
@@ -36,7 +36,7 @@ def microsoft_translate(text, sourceLang, destLang):
         raise
         
 def google_translate(text, sourceLang, destLang):
-    if not flask_application.debug:
+    if not flask_framework.debug:
         return gettext('Error: translation service not available.')
     try:
         params = urllib.urlencode({

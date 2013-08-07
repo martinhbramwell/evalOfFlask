@@ -1,4 +1,4 @@
-from frmwk import flask_application, orm_db
+from frmwk import flask_framework, orm_db
 # from frmwk import db, lm, oid, babel
 
 from flask.ext.login import login_required, current_user
@@ -15,14 +15,14 @@ from frmwk import comptroller_permission
 from frmwk.model.mdLease import Lease
 from frmwk.forms.fmLease import LeaseForm
 
-@flask_application.route('/leases')
-@flask_application.route('/leases/<int:page>')
+@flask_framework.route('/leases')
+@flask_framework.route('/leases/<int:page>')
 @login_required
 def leases(page = 1):
     print 'leases or leases with ' + str(page)
     return renderThem({'pageNum': page}) 
 
-@flask_application.route('/newlease', methods = ['GET', 'POST'])
+@flask_framework.route('/newlease', methods = ['GET', 'POST'])
 @login_required
 def newlease():
     print 'newlease'
@@ -37,7 +37,7 @@ def newlease():
         flash(gettext('You are not authorised to create new leases. You can request permission in "Your Profile"'), 'error')
         return redirect(url_for('leases'))
 
-@flask_application.route('/lease/<official_id>', methods = ['GET', 'POST'])
+@flask_framework.route('/lease/<official_id>', methods = ['GET', 'POST'])
 @login_required
 def lease(official_id = None):
     print 'lease/id with ' + str(official_id)
